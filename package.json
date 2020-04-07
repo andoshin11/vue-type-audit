@@ -1,0 +1,11 @@
+{
+  "name": "v-tik",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "andoshin11 <shinglish11@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^13.11.0",
+    "typescript": "^3.8.3"
+  }
+}
