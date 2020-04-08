@@ -6,17 +6,22 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "test:unit": "jest"
   },
   "devDependencies": {
+    "@types/jest": "^25.2.1",
     "@types/node": "^13.11.0",
     "@types/prettier": "^2.0.0",
+    "jest": "^25.2.7",
+    "ts-jest": "^25.3.1",
     "typescript": "^3.8.3"
   },
   "dependencies": {
     "@vue/compiler-core": "^3.0.0-alpha.11",
     "@vue/compiler-dom": "^3.0.0-alpha.11",
     "@vue/compiler-sfc": "^3.0.0-alpha.11",
+    "chalk": "^4.0.0",
     "prettier": "^2.0.4",
     "vue-next": "^0.0.1"
   }
