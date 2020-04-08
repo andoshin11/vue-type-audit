@@ -1,3 +1,4 @@
+import _ts from 'typescript'
 import { Location } from '../types'
 
 export const pos2location = (content: string, pos: number): Location => {
@@ -13,4 +14,8 @@ export const pos2location = (content: string, pos: number): Location => {
     }
   }
   return { line: l, character: c };
+}
+
+export const createSourceFile = (ts: typeof _ts, sourceText: string, languageVersion: _ts.ScriptTarget, fileName?: string) => {
+  return ts.createSourceFile(fileName || 'dummy.ts', sourceText, languageVersion)
 }
