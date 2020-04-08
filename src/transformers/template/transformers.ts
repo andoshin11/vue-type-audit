@@ -1,6 +1,12 @@
 import _ts from 'typescript'
 import { findTargetSyntaxKind } from '../../ast'
 
+export function transformTemplate(template: _ts.SourceFile, ts: typeof _ts) {
+  const renderCallTransformed = transformRenderCall(template, ts)
+
+  return [...renderCallTransformed]
+}
+
 // Compiled template code should have 1 import statement, and 1 function declaration
 export function transformRenderCall(template: _ts.SourceFile, ts: typeof _ts): _ts.Node[] {
   const importStatement = findTargetSyntaxKind(ts, template, ts.SyntaxKind.ImportDeclaration)!

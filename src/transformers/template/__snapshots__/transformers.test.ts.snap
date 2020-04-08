@@ -17,3 +17,21 @@ function render(_ctx: __ComponentType) {
 }
 "
 `;
+
+exports[`transformers/template/transformers transformTemplate 1`] = `
+"import {
+  toDisplayString as _toDisplayString,
+  createVNode as _createVNode,
+  openBlock as _openBlock,
+  createBlock as _createBlock,
+} from \\"vue\\";
+function render(_ctx: __ComponentType) {
+  return (
+    _openBlock(),
+    _createBlock(\\"div\\", null, [
+      _createVNode(\\"h1\\", null, _toDisplayString(_ctx.msg), 1),
+    ])
+  );
+}
+"
+`;
