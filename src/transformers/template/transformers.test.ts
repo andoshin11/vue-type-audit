@@ -20,7 +20,7 @@ export function render(_ctx, _cache) {
     const sourceFile = createSourceFile(ts, rawText, ts.ScriptTarget.ES2017)
     const output = transformRenderCall(sourceFile, ts)
 
-    expect(printer.prettyPrint(output)).toMatchSnapshot()
+    expect(printer.print(output)).toMatchSnapshot()
   })
 
   test('transformRenderCall', () => {
@@ -36,6 +36,6 @@ export function render(_ctx, _cache) {
     const sourceFile = createSourceFile(ts, rawText, ts.ScriptTarget.ES2017)
     const output = transformRenderCall(sourceFile, ts)
 
-    expect(printer.prettyPrint(output)).toMatchSnapshot()
+    expect(printer.print(output)).toMatchSnapshot()
   })
 })
