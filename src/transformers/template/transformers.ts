@@ -1,42 +1,37 @@
 import _ts from 'typescript'
-import { findTargetSyntaxKind } from '../../ast'
+import { SourceMapGenerator, RawSourceMap } from 'source-map'
+import { CompiledVueTemplateFileName } from '../../types'
+import { toTransformedCompiledVueTemplateFileName } from '../../helpers'
 
-export function transformTemplate(template: _ts.SourceFile, ts: typeof _ts) {
-  const renderCallTransformed = transformRenderCall(template, ts)
+export function transformTemplate(
+  fileName: CompiledVueTemplateFileName,
+  content: string
+) {
+  const transformedCompiledVueTemplateFileName = toTransformedCompiledVueTemplateFileName(fileName)
+  const gen = new SourceMapGenerator({ file: transformedCompiledVueTemplateFileName })
+  gen.setSourceContent(fileName, content)
 
-  return [...renderCallTransformed]
-}
+  // escape overridden identifiers
+  let transformed = content
+  transformed = transformed.replace(/_createVNode/, '#createVNode')
+  transformed = transformed.replace(/_resolveComponent/, '#resolveComponent')
 
-// Compiled template code should have 1 import statement, and 1 function declaration
-export function transformRenderCall(template: _ts.SourceFile, ts: typeof _ts): _ts.Node[] {
-  const importStatement = findTargetSyntaxKind(ts, template, ts.SyntaxKind.ImportDeclaration)!
-  const blockDeclaration = findTargetSyntaxKind(ts, template, ts.SyntaxKind.Block)! as _ts.Block
+  // strip export assignment
+  transformed = transformed.replace('export function render(_ctx, _cache)', 'function render(_ctx: __ComponentType)')
 
-  const transformed = [
-    importStatement,
+  transformed
+    .split('\n')
+    .forEach((_, index) => {
+      gen.addMapping({
+        source: fileName,
+        original: { line: index + 1, column: 0 },
+        generated: { line: index + 1, column: 0 }
+      })
+    })
 
-    ts.createFunctionDeclaration(
-      undefined,
-      undefined,
-      undefined,
-      ts.createIdentifier("render"),
-      undefined,
-      [ts.createParameter(
-        undefined,
-        undefined,
-        undefined,
-        ts.createIdentifier("_ctx"),
-        undefined,
-        ts.createTypeReferenceNode(
-          ts.createIdentifier("__ComponentType"),
-          undefined
-        ),
-        undefined
-      )],
-      undefined,
-      blockDeclaration
-    )
-  ]
-
-  return transformed
+  const map = JSON.parse(gen.toString()) as RawSourceMap
+  return {
+    transformed,
+    map
+  }
 }
