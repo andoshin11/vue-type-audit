@@ -86,7 +86,7 @@ export function transformVueFile(
   sourcemapEntry.set(tsVueFileName, { map })
 
   const output = preparationBlock + '\n' + scriptBlock.transformed + '\n' + templateBlock.transformed
-  fs.writeFileSync(toTSVueFIleName(fileName), output)
+  // fs.writeFileSync(toTSVueFIleName(fileName), output)
 
   return output
 }
