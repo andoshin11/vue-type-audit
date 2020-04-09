@@ -26,7 +26,7 @@ export default __Component;\ntype __ComponentType = ClassInstance<typeof __Compo
 
 declare function _createVNode<N extends (keyof __ExternalComponents | _VNodeTypes | _ClassComponent), C = N extends keyof __ExternalComponents ?  __ExternalComponents[N] : unknown>(type: N, ...args: (N extends keyof __ExternalComponents ? {} extends PropTypes<C> ? [(_VNodeProps & PropTypes<C>)?, unknown?, number?, (string[] | null)?] : [(_VNodeProps & PropTypes<C>), unknown?, number?, (string[] | null)?] : [((_Data & _VNodeProps) | null)?, unknown?, number?, (string[] | null)?])): _VNode;
 
-declare function _resolveComponent<N extends keyof __ResolveComponentNames>(name: N): __ResolveComponentNames[N]
+declare function _resolveComponent<N extends (keyof __ResolveComponentNames | string)>(name: N): N extends keyof __ResolveComponentNames ? __ResolveComponentNames[N] : string
 `
   const transformed = stripDefaultExport + `\n\n` + externalComponentsType + footer
 
@@ -64,7 +64,7 @@ function createExternalComponentsType(content: string, ts: typeof _ts) {
   }
 
   const componentsProperty = findComponentsProperty(objectLiteralExpression)
-  if (!componentsProperty) return ''
+  if (!componentsProperty) return 'type __ExternalComponents = {}\n\ntype __ResolveComponentNames = {}\n\n'
 
   // Get external components name
   const objectLiteralExpression2 = findTargetSyntaxKind(ts, componentsProperty, ts.SyntaxKind.ObjectLiteralExpression)!

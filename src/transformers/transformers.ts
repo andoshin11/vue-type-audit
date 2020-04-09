@@ -1,4 +1,5 @@
 import _ts from 'typescript'
+import * as fs from 'fs'
 import { parse as parseComponent } from '@vue/compiler-sfc'
 import { compile } from '@vue/compiler-dom'
 import { RawVueFileName, SourcemapEntry } from '../types'
@@ -83,7 +84,10 @@ export function transformVueFile(
 
   sourcemapEntry.set(tsVueFileName, { map })
 
-  return preparationBlock + '\n' + scriptBlock.transformed + '\n' + templateBlock.transformed
+  const output = preparationBlock + '\n' + scriptBlock.transformed + '\n' + templateBlock.transformed
+  fs.writeFileSync(toTSVueFIleName(fileName), output)
+
+  return output
 }
 
 function createPreparationBlock() {
