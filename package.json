@@ -4,6 +4,22 @@
   "main": "index.js",
   "author": "andoshin11 <shinglish11@gmail.com>",
   "license": "MIT",
+  "bin": {
+    "audit": "./bin/audit.js"
+  },
+  "keywords": [
+    "vue",
+    "typescript",
+    "typecheck"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andoshin11/vue-type-audit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andoshin11/vue-type-audit/issues"
+  },
+  "homepage": "https://github.com/andoshin11/vue-type-audit#readme",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
