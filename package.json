@@ -10,6 +10,7 @@
     "test:unit": "jest"
   },
   "devDependencies": {
+    "@types/commander": "^2.12.2",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.11.0",
     "@types/prettier": "^2.0.0",
@@ -22,6 +23,7 @@
     "@vue/compiler-dom": "^3.0.0-alpha.11",
     "@vue/compiler-sfc": "^3.0.0-alpha.11",
     "chalk": "^4.0.0",
+    "commander": "^5.0.0",
     "prettier": "^2.0.4",
     "source-map": "^0.6.1",
     "vue-next": "^0.0.1"
