@@ -75,7 +75,7 @@ export const createHost = (fileNames: string[], compilerOptions: _ts.CompilerOpt
         let content = fs.readFileSync(fileName).toString()
 
         if (isRawVueFile(fileName)) {
-          content = transformVueFile(fileName, content, sourcemapEntry)
+          content = transformVueFile(fileName, content, sourcemapEntry, ts)
         }
 
         const scriptSnapshot = ts.ScriptSnapshot.fromString(content)

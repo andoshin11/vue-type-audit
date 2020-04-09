@@ -10,7 +10,8 @@ import { toVueScriptFileName, toTSVueFIleName, toVueTemplateFileName, toCompiled
 export function transformVueFile(
   fileName: RawVueFileName,
   content: string,
-  sourcemapEntry: SourcemapEntry
+  sourcemapEntry: SourcemapEntry,
+  ts: typeof _ts
 ) {
   const tsVueFileName = toTSVueFIleName(fileName)
 
@@ -53,7 +54,7 @@ export function transformVueFile(
    */
   const preparationBlock = createPreparationBlock()
 
-  const scriptBlock = transformScript(vueScriptFileName, scriptContent, _ts)
+  const scriptBlock = transformScript(vueScriptFileName, scriptContent, ts)
   const templateBlock = transformTemplate(compiledVueTemplateFileName, templateContent)
 
   const preparationBlockLinesNum = preparationBlock.split('\n').length
