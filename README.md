@@ -1,4 +1,4 @@
-# vue-type-audit
+# vue-type-audit ![npm](https://img.shields.io/npm/v/vue-type-audit) ![GitHub](https://img.shields.io/github/license/andoshin11/vue-type-audit)
 
 A TypeScript error checker that supports Vue SFC(Single File Component).
 
@@ -12,6 +12,10 @@ A TypeScript error checker that supports Vue SFC(Single File Component).
 - supports [vue-next](https://github.com/vuejs/vue-next) only
 - all components **must** have `<script/>` block
 - only tested with standard Vue SFC. (Class-Style component is not tested!)
+
+## Example Usage
+
+See [example](./example)
 
 ## Install
 
@@ -38,7 +42,7 @@ Options:
 
 This tool uses [TypeScript Compiler API](https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API) to run diagnostics.
 
-When some `.ts/.tsx` module tries to import `.vue` files, this tool intercepts module resolving process of the compiler and returns transformed `.vue` file. (internally the file is interpreted as `<your component name>.vue.ts`)
+When some `.ts/.tsx` module tries to import `.vue` files, this tool intercepts module resolving process of the compiler and returns transformed `.vue` files. (internally the file is interpreted in `<your component name>.vue.ts` format)
 
 ```
           import a.vue                     reads actual file
