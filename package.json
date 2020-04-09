@@ -5,7 +5,7 @@
   "author": "andoshin11 <shinglish11@gmail.com>",
   "license": "MIT",
   "bin": {
-    "audit": "./bin/audit.js"
+    "type-audit": "./bin/audit.js"
   },
   "keywords": [
     "vue",
