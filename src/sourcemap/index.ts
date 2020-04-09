@@ -43,8 +43,8 @@ export function getOriginalPositionFor(
       return getOriginalPositionFor(source, { line, column: location.column }, sourcemapEntry)
     }
 
-    throw new Error('could not resolve position from sourcemap')
+    throw new Error('could not resolve position from sourcemap for ' + fileName)
   } else {
-    throw new Error('could not resolve position from sourcemap')
+    throw new Error('could not resolve position from sourcemap for ' + fileName)
   }
 }
