@@ -1,21 +1,79 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`transformers/template/transformers transformRenderCall 1`] = `
-"import { toDisplayString as _toDisplayString, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock } from \\"vue\\";
-function render(_ctx: __ComponentType) {
-    return (_openBlock(), _createBlock(\\"div\\", null, [
-        _createVNode(\\"h1\\", null, _toDisplayString(_ctx.msg), 1)
-    ]));
+exports[`transformers/template/transformers transformTemplate 1`] = `
+Object {
+  "map": Object {
+    "file": "test.vue.template.ts",
+    "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA",
+    "names": Array [],
+    "sources": Array [
+      "test.vue.template.ts",
+    ],
+    "sourcesContent": Array [
+      "
+import { toDisplayString as _toDisplayString, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock } from \\"vue\\";
+
+export function render(_ctx, _cache) {
+  return (_openBlock(), _createBlock(\\"div\\", null, [
+    _createVNode(\\"h1\\", null, _toDisplayString(_ctx.msg), 1 /* TEXT */)
+  ]))
 }
-"
+    ",
+    ],
+    "version": 3,
+  },
+  "transformed": "
+import { toDisplayString as _toDisplayString, createVNode as #createVNode, openBlock as _openBlock, createBlock as _createBlock } from \\"vue\\";
+
+function render(_ctx: __ComponentType) {
+  return (_openBlock(), _createBlock(\\"div\\", null, [
+    _createVNode(\\"h1\\", null, _toDisplayString(_ctx.msg), 1 /* TEXT */)
+  ]))
+}
+    ",
+}
 `;
 
-exports[`transformers/template/transformers transformTemplate 1`] = `
-"import { toDisplayString as _toDisplayString, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock } from \\"vue\\";
+exports[`transformers/template/transformers transformTemplate 2`] = `
+Object {
+  "map": Object {
+    "file": "test.vue.template.ts",
+    "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA",
+    "names": Array [],
+    "sources": Array [
+      "test.vue.template.ts",
+    ],
+    "sourcesContent": Array [
+      "
+import { createVNode as _createVNode, toDisplayString as _toDisplayString, resolveComponent as _resolveComponent, openBlock as _openBlock, createBlock as _createBlock } from \\"vue\\"
+
 function render(_ctx: __ComponentType) {
-    return (_openBlock(), _createBlock(\\"div\\", null, [
-        _createVNode(\\"h1\\", null, _toDisplayString(_ctx.msg), 1)
-    ]));
+  const _component_HelloWorld = _resolveComponent(\\"HelloWorld\\")
+
+  return (_openBlock(), _createBlock(\\"div\\", null, [
+    _createVNode(\\"img\\", { src: \\"./logo.png\\" }),
+    _createVNode(\\"h1\\", null, \\"Hello Vue 3!\\"),
+    _createVNode(\\"button\\", { onClick: _ctx.inc }, \\"Clicked \\" + _toDisplayString(_ctx.count.length) + \\" times.\\", 9 /* TEXT, PROPS */, [\\"onClick\\"]),
+    _createVNode(_component_HelloWorld)
+  ]))
+}   
+    ",
+    ],
+    "version": 3,
+  },
+  "transformed": "
+import { createVNode as #createVNode, toDisplayString as _toDisplayString, resolveComponent as #resolveComponent, openBlock as _openBlock, createBlock as _createBlock } from \\"vue\\"
+
+function render(_ctx: __ComponentType) {
+  const _component_HelloWorld = _resolveComponent(\\"HelloWorld\\")
+
+  return (_openBlock(), _createBlock(\\"div\\", null, [
+    _createVNode(\\"img\\", { src: \\"./logo.png\\" }),
+    _createVNode(\\"h1\\", null, \\"Hello Vue 3!\\"),
+    _createVNode(\\"button\\", { onClick: _ctx.inc }, \\"Clicked \\" + _toDisplayString(_ctx.count.length) + \\" times.\\", 9 /* TEXT, PROPS */, [\\"onClick\\"]),
+    _createVNode(_component_HelloWorld)
+  ]))
+}   
+    ",
 }
-"
 `;
