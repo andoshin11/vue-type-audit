@@ -3,11 +3,10 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { FileEntry, SourcemapEntry } from '../types'
 import { transformVueFile } from '../transformers'
-import { Printer } from '../printer'
 import { GLOBAL_TYPES_FILE } from '../asset'
 import { isRawVueFile, isTSVueFile, toRawVueFileName } from '../helpers'
 
-export const createHost = (fileNames: string[], compilerOptions: _ts.CompilerOptions, fileEntry: FileEntry, sourcemapEntry: SourcemapEntry, printer: Printer, ts: typeof _ts): _ts.LanguageServiceHost => {
+export const createHost = (fileNames: string[], compilerOptions: _ts.CompilerOptions, fileEntry: FileEntry, sourcemapEntry: SourcemapEntry, ts: typeof _ts): _ts.LanguageServiceHost => {
   // Register GLOBAL_TYPES_FILE
   fileNames = [...fileNames, GLOBAL_TYPES_FILE.name]
 
