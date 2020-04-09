@@ -1,4 +1,4 @@
-# vue-type-audit ![npm](https://img.shields.io/npm/v/vue-type-audit) ![GitHub](https://img.shields.io/github/license/andoshin11/vue-type-audit)
+# vue-type-audit ![npm](https://img.shields.io/npm/v/vue-type-audit) ![GitHub](https://img.shields.io/github/license/andoshin11/vue-type-audit) ![CI Status](https://github.com/andoshin11/vue-type-audit/workflows/main/badge.svg)
 
 A TypeScript error checker that supports Vue SFC(Single File Component).
 
