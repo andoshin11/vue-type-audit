@@ -7,7 +7,7 @@ import { toVueScriptFileName, toTSVueFIleName, toVueTemplateFileName, toCompiled
 export function createTSVueFile(
   fileName: RawVueFileName,
   scriptContent: string,
-  templateContent: string,
+  templateContent: string | undefined,
   sourcemapEntry: SourcemapEntry
 ) {
   const tsVueFileName = toTSVueFIleName(fileName)

@@ -5,21 +5,23 @@ import { toTransformedCompiledVueTemplateFileName } from '../../helpers'
 
 export function transformTemplate(
   fileName: CompiledVueTemplateFileName,
-  content: string
+  content: string | undefined
 ) {
   const transformedCompiledVueTemplateFileName = toTransformedCompiledVueTemplateFileName(fileName)
   const gen = new SourceMapGenerator({ file: transformedCompiledVueTemplateFileName })
-  gen.setSourceContent(fileName, content)
+  gen.setSourceContent(fileName, content || '')
 
   // escape overridden identifiers
   let transformed = content
-  transformed = transformed.replace(/_createVNode/, '#createVNode')
-  transformed = transformed.replace(/_resolveComponent/, '#resolveComponent')
 
-  // strip export assignment
-  transformed = transformed.replace('export function render(_ctx, _cache)', 'function render(_ctx: __ComponentType)')
+  if (transformed) {
+    transformed = transformed.replace(/_createVNode/, '#createVNode')
+    transformed = transformed.replace(/_resolveComponent/, '#resolveComponent')
 
-  transformed
+    // strip export assignment
+    transformed = transformed.replace('export function render(_ctx, _cache)', 'function render(_ctx: __ComponentType)')
+
+    transformed
     .split('\n')
     .forEach((_, index) => {
       gen.addMapping({
@@ -28,6 +30,7 @@ export function transformTemplate(
         generated: { line: index + 1, column: 0 }
       })
     })
+  }
 
   const map = JSON.parse(gen.toString()) as RawSourceMap
   return {
