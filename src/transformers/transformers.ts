@@ -66,7 +66,7 @@ export function transformVueFile(
       // script block
       {
         offset: {
-          line: preparationBlockLinesNum,
+          line: preparationBlockLinesNum + 1,
           column: 0
         },
         map: scriptBlock.map

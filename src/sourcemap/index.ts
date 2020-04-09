@@ -24,8 +24,11 @@ export function getOriginalPositionFor(
     if (isRawVueFile(source)) {
       // This block will be the final emit result.
 
+      // // Note: since we cannot resolve correct column position for Vue template
+      const emitColumn = isVueTemplateFile(fileName) ? 0 : location.column
+
       // Note: TypeScript counts lines from 0, while sourcemap v3 treats lines with 1-basis.
-      return { line: line + 1, column: location.column }
+      return { line: line, column: emitColumn }
     }
 
     if (isVueScriptFile(source)) {
@@ -39,8 +42,7 @@ export function getOriginalPositionFor(
     }
 
     if (isVueTemplateFile(source)) {
-      // proxy column for a technical reason
-      return getOriginalPositionFor(source, { line, column: location.column }, sourcemapEntry)
+      return getOriginalPositionFor(source, { line, column }, sourcemapEntry)
     }
 
     throw new Error('could not resolve position from sourcemap for ' + fileName)
