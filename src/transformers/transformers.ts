@@ -1,23 +1,58 @@
 import _ts from 'typescript'
+import { parse as parseComponent } from '@vue/compiler-sfc'
+import { compile } from '@vue/compiler-dom'
 import { RawVueFileName, SourcemapEntry } from '../types'
 import { transformScript } from './script'
 import { transformTemplate } from './template'
 import { toVueScriptFileName, toTSVueFIleName, toVueTemplateFileName, toCompiledVueTemplateFileName } from '../helpers'
 
-export function createTSVueFile(
+export function transformVueFile(
   fileName: RawVueFileName,
-  scriptContent: string,
-  templateContent: string | undefined,
+  content: string,
   sourcemapEntry: SourcemapEntry
 ) {
   const tsVueFileName = toTSVueFIleName(fileName)
+
+  // Parse blocks
+  const { template, script } = parseComponent(content, { sourceMap: true, filename: fileName }).descriptor
+
+  // `template` can be empty, yet you always require `script` block
+  if (!script) {
+    throw new Error('<script/> block is missing in ' + fileName)
+  }
+
+  /**
+   * Register sourcemap for blocks
+   */
+
+  // `template`
+  const vueTemplateFileName = toVueTemplateFileName(fileName)
+  sourcemapEntry.set(vueTemplateFileName, { map: template ? template.map : undefined })
+
+  const compiledVueTemplateFileName = toCompiledVueTemplateFileName(vueTemplateFileName)
+  const compiled = compile(template ? template.content : '', { mode: 'module', sourceMap: true, filename: vueTemplateFileName })
+  sourcemapEntry.set(compiledVueTemplateFileName, { map: compiled.map })
+
+
+  // `script`
+  const vueScriptFileName = toVueScriptFileName(fileName)
+  sourcemapEntry.set(vueScriptFileName, {
+    map: {
+      ...script.map!,
+      file: vueScriptFileName
+    }
+  })
+
+  let templateContent = !!compiled.code ? compiled.code : undefined
+  let scriptContent = script.content
+
+
+  /**
+   * Create outputs
+   */
   const preparationBlock = createPreparationBlock()
 
-  const vueScriptFileName = toVueScriptFileName(fileName)
   const scriptBlock = transformScript(vueScriptFileName, scriptContent, _ts)
-
-  const vueTemplateFileName = toVueTemplateFileName(fileName)
-  const compiledVueTemplateFileName = toCompiledVueTemplateFileName(vueTemplateFileName)
   const templateBlock = transformTemplate(compiledVueTemplateFileName, templateContent)
 
   const preparationBlockLinesNum = preparationBlock.split('\n').length
