@@ -13,9 +13,9 @@ export const pos2location = (content: string, pos: number): Location => {
       c++;
     }
   }
-  return { line: l, character: c };
+  return { line: l, column: c };
 }
 
-export const createSourceFile = (ts: typeof _ts, sourceText: string, languageVersion: _ts.ScriptTarget, fileName?: string) => {
+export const createSourceFile = (ts: typeof _ts, sourceText: string, languageVersion: _ts.ScriptTarget = ts.ScriptTarget.ES2020, fileName?: string) => {
   return ts.createSourceFile(fileName || 'dummy.ts', sourceText, languageVersion)
 }
