@@ -1,5 +1,6 @@
 export const GLOBAL_TYPES_FILE = {
   name: '__GLOBAL_TYPES.d.ts',
+  identifier: '__GLOBAL_TYPES',
   content: `
 import { ComponentPublicInstance, VNodeProps, VNode, VNodeTypes, ComponentOptions } from 'vue'
 
