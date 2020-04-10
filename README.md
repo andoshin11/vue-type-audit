@@ -2,15 +2,13 @@
 
 A TypeScript error checker that supports Vue SFC(Single File Component).
 
-<img width="600" alt="Screen Shot 2020-04-10 at 3 57 07" src="https://user-images.githubusercontent.com/8381075/78930656-70fac600-7adf-11ea-8ed1-2fb0a9bf78d9.png">
+<img width="600" alt="Screen Shot 2020-04-10 at 14 56 25" src="https://user-images.githubusercontent.com/8381075/78966757-9f0df380-7b3b-11ea-88bd-6ff413eea264.png">
 
-<img width="600" alt="Screen Shot 2020-04-10 at 3 55 01" src="https://user-images.githubusercontent.com/8381075/78930500-32fda200-7adf-11ea-8873-2b4431512c0b.png">
-
+<img width="600" alt="Screen Shot 2020-04-10 at 14 56 06" src="https://user-images.githubusercontent.com/8381075/78966740-974e4f00-7b3b-11ea-82fe-018123a6c13c.png">
 
 ## Current Limitation
 
 - supports [vue-next](https://github.com/vuejs/vue-next) only
-- all components **must** have `<script/>` block
 - only tested with standard Vue SFC. (Class-Style component is not tested!)
 
 ## Example Usage
@@ -64,8 +62,13 @@ The entire process can be broke down into 4 steps.
 3. Merge into one `.vue.ts` file
 
 ```
-         parsed into blocks ┌----> `a.vue.script.ts` ------------┐
-                            |                                    |
+                            `a.vue.script.compiled.ts` ----------┐
+                                        ↑                        |
+          extra transformation          |                        |
+                                        |                        |
+                            ┌--> `a.vue.script.ts`               |
+        parsed into blocks  |                                    |
+                            |                                    | merged
 `a.vue` --------------------|                                    |
                             |                                    ↓
                             └--> `a.vue.template.ts`        `a.vue.ts`
