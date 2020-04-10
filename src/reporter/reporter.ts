@@ -75,7 +75,6 @@ export class Reporter {
     const lines = allLines.slice(startLC.line, endLC.line + 1);
     const postLines = allLines.slice(endLC.line + 1, Math.min(allLines.length - 1, endLC.line + 2));
     const lineMarkerWidth = (Math.min(allLines.length - 1, endLC.line + 2) + '').length;
-    const showUnderLine = lineMarkerWidth > 1
     for (let i = 0; i < preLines.length; ++i) {
       outputs.push(lineMark(i + startLC.line - 1, lineMarkerWidth) + chalk.reset(preLines[i]));
     }
@@ -83,13 +82,11 @@ export class Reporter {
       outputs.push(lineMark(i + startLC.line, lineMarkerWidth) + lines[i]);
       if (i === 0) {
         if (startLC.line === endLC.line) {
-          if (showUnderLine) {
-            outputs.push(
-              lineMarkForUnderline(lineMarkerWidth) +
-                pad(' ', startLC.column) +
-                chalk.red(pad('~', endLC.column - startLC.column)),
-            );
-          }
+          outputs.push(
+            lineMarkForUnderline(lineMarkerWidth) +
+              pad(' ', startLC.column) +
+              chalk.red(pad('~', endLC.column - startLC.column)),
+          );
         } else {
           outputs.push(
             lineMarkForUnderline(lineMarkerWidth) +

@@ -44,7 +44,7 @@ export function transformVueFile(
       },
       {
         offset: {
-          line: scriptBlockLinesNum + typeHelpersBlockLinesNum + 1,
+          line: scriptBlockLinesNum + typeHelpersBlockLinesNum,
           column: 0
         },
         map: templateBlock.map
