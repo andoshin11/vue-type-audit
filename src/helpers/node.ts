@@ -19,3 +19,5 @@ export const pos2location = (content: string, pos: number): Location => {
 export const createSourceFile = (ts: typeof _ts, sourceText: string, languageVersion: _ts.ScriptTarget = ts.ScriptTarget.ES2020, fileName?: string) => {
   return ts.createSourceFile(fileName || 'dummy.ts', sourceText, languageVersion)
 }
+
+export const getFullTextFromSnapshot = (snapshot: _ts.IScriptSnapshot) => snapshot.getText(0, snapshot.getLength())
