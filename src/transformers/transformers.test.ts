@@ -68,6 +68,13 @@ export default defineComponent({
 })
 </script>
     `,
+    `
+<template>
+  <div>
+    <h1>Hello world!</h1>
+  </div>
+</template>
+    `,
     ]
 
     const sourcemapEntry = new Map() as SourcemapEntry

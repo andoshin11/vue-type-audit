@@ -16,6 +16,7 @@ export const pos2location = (content: string, pos: number): Location => {
   return { line: l, column: c };
 }
 
+// FIXME: use local tsconfig.json target
 export const createSourceFile = (ts: typeof _ts, sourceText: string, languageVersion: _ts.ScriptTarget = ts.ScriptTarget.ES2020, fileName?: string) => {
   return ts.createSourceFile(fileName || 'dummy.ts', sourceText, languageVersion)
 }

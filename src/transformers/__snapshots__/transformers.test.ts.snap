@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`transformers transformScript 1`] = `
-"import { ClassInstance, __createVNodeFromExternalComponent, _VNodeProps, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data } from \\"__GLOBAL_TYPES\\";
-
+"
 import { ref, defineComponent } from 'vue'
 import HelloWorld from './HelloWorld.vue'
 
@@ -25,22 +24,20 @@ const __Component = defineComponent({
 })
 
 
+///////////////////// START: Type Helpers ///////////////////
+import { ClassInstance, _VNodeProps, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data } from \\"__GLOBAL_TYPES\\";
+
 type __ExternalComponents = {
-_component_HelloWorld: ClassInstance<typeof HelloWorld>;
+  HelloWorld: ClassInstance<typeof HelloWorld>;
 }
-
-type __ResolveComponentNames = {
-HelloWorld: '_component_HelloWorld';
-}
-
 
 export default __Component;
 type __ComponentType = ClassInstance<typeof __Component>;
 
-
 declare function _createVNode<N extends (keyof __ExternalComponents | _VNodeTypes | _ClassComponent), C = N extends keyof __ExternalComponents ?  __ExternalComponents[N] : unknown>(type: N, ...args: (N extends keyof __ExternalComponents ? {} extends PropTypes<C> ? [(_VNodeProps & PropTypes<C>)?, unknown?, number?, (string[] | null)?] : [(_VNodeProps & PropTypes<C>), unknown?, number?, (string[] | null)?] : [((_Data & _VNodeProps) | null)?, unknown?, number?, (string[] | null)?])): _VNode;
 
-declare function _resolveComponent<N extends (keyof __ResolveComponentNames | string)>(name: N): N extends keyof __ResolveComponentNames ? __ResolveComponentNames[N] : string
+declare function _resolveComponent<N>(name: N): N;
+///////////////////// END: Type Helpers /////////////////////
 
 import { createVNode as #createVNode, toDisplayString as _toDisplayString, resolveComponent as #resolveComponent, openBlock as _openBlock, createBlock as _createBlock } from \\"vue\\"
 
@@ -57,8 +54,7 @@ function render(_ctx: __ComponentType) {
 `;
 
 exports[`transformers transformScript 2`] = `
-"import { ClassInstance, __createVNodeFromExternalComponent, _VNodeProps, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data } from \\"__GLOBAL_TYPES\\";
-
+"
 import { defineComponent } from 'vue'
 
 const __Component = defineComponent({
@@ -71,18 +67,20 @@ const __Component = defineComponent({
 })
 
 
-type __ExternalComponents = {}
+///////////////////// START: Type Helpers ///////////////////
+import { ClassInstance, _VNodeProps, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data } from \\"__GLOBAL_TYPES\\";
 
-type __ResolveComponentNames = {}
-
+type __ExternalComponents = {
+  
+}
 
 export default __Component;
 type __ComponentType = ClassInstance<typeof __Component>;
 
-
 declare function _createVNode<N extends (keyof __ExternalComponents | _VNodeTypes | _ClassComponent), C = N extends keyof __ExternalComponents ?  __ExternalComponents[N] : unknown>(type: N, ...args: (N extends keyof __ExternalComponents ? {} extends PropTypes<C> ? [(_VNodeProps & PropTypes<C>)?, unknown?, number?, (string[] | null)?] : [(_VNodeProps & PropTypes<C>), unknown?, number?, (string[] | null)?] : [((_Data & _VNodeProps) | null)?, unknown?, number?, (string[] | null)?])): _VNode;
 
-declare function _resolveComponent<N extends (keyof __ResolveComponentNames | string)>(name: N): N extends keyof __ResolveComponentNames ? __ResolveComponentNames[N] : string
+declare function _resolveComponent<N>(name: N): N;
+///////////////////// END: Type Helpers /////////////////////
 
 import { toDisplayString as _toDisplayString, createVNode as #createVNode, openBlock as _openBlock, createBlock as _createBlock } from \\"vue\\"
 
@@ -94,6 +92,38 @@ function render(_ctx: __ComponentType) {
 `;
 
 exports[`transformers transformScript 3`] = `
+"
+import { defineComponent } from 'vue'
+
+const __Component = defineComponent({
+})
+
+
+///////////////////// START: Type Helpers ///////////////////
+import { ClassInstance, _VNodeProps, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data } from \\"__GLOBAL_TYPES\\";
+
+type __ExternalComponents = {
+  
+}
+
+export default __Component;
+type __ComponentType = ClassInstance<typeof __Component>;
+
+declare function _createVNode<N extends (keyof __ExternalComponents | _VNodeTypes | _ClassComponent), C = N extends keyof __ExternalComponents ?  __ExternalComponents[N] : unknown>(type: N, ...args: (N extends keyof __ExternalComponents ? {} extends PropTypes<C> ? [(_VNodeProps & PropTypes<C>)?, unknown?, number?, (string[] | null)?] : [(_VNodeProps & PropTypes<C>), unknown?, number?, (string[] | null)?] : [((_Data & _VNodeProps) | null)?, unknown?, number?, (string[] | null)?])): _VNode;
+
+declare function _resolveComponent<N>(name: N): N;
+///////////////////// END: Type Helpers /////////////////////
+
+import { createVNode as #createVNode, openBlock as _openBlock, createBlock as _createBlock } from \\"vue\\"
+
+function render(_ctx: __ComponentType) {
+  return (_openBlock(), _createBlock(\\"div\\", null, [
+    _createVNode(\\"h1\\", null, \\"Hello world!\\")
+  ]))
+}"
+`;
+
+exports[`transformers transformScript 4`] = `
 Map {
   "test.vue.template.ts" => Object {
     "map": Object {
@@ -108,20 +138,14 @@ Map {
         "
 <template>
   <div>
-    <h1>{{ msg }}</h1>
+    <h1>Hello world!</h1>
   </div>
 </template>
-
+    
 <script lang=\\"ts\\">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  props: {
-    msg: {
-      type: String,
-      required: true
-    }
-  }
 })
 </script>
     ",
@@ -131,17 +155,15 @@ export default defineComponent({
   },
   "test.vue.template.compiled.ts" => Object {
     "map": Object {
-      "mappings": ";;;wBACE,aAEM;IADJ,aAAkB,6BAAXA,QAAG",
-      "names": Array [
-        "msg",
-      ],
+      "mappings": ";;;wBACE,aAEM;IADJ,aAAqB,YAAjB,cAAY",
+      "names": Array [],
       "sources": Array [
         "test.vue.template.ts",
       ],
       "sourcesContent": Array [
         "
   <div>
-    <h1>{{ msg }}</h1>
+    <h1>Hello world!</h1>
   </div>
 ",
       ],
@@ -151,7 +173,7 @@ export default defineComponent({
   "test.vue.script.ts" => Object {
     "map": Object {
       "file": "test.vue.script.ts",
-      "mappings": ";AAQA;;AAEA;AACA;AACA;AACA;AACA;AACA;AACA;AACA",
+      "mappings": ";AAQA;;AAEA;AACA",
       "names": Array [],
       "sourceRoot": "",
       "sources": Array [
@@ -161,20 +183,14 @@ export default defineComponent({
         "
 <template>
   <div>
-    <h1>{{ msg }}</h1>
+    <h1>Hello world!</h1>
   </div>
 </template>
-
+    
 <script lang=\\"ts\\">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  props: {
-    msg: {
-      type: String,
-      required: true
-    }
-  }
 })
 </script>
     ",
@@ -189,7 +205,7 @@ export default defineComponent({
         Object {
           "map": Object {
             "file": "test.vue.script.transformed.ts",
-            "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA",
+            "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA",
             "names": Array [],
             "sources": Array [
               "test.vue.script.ts",
@@ -199,12 +215,6 @@ export default defineComponent({
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  props: {
-    msg: {
-      type: String,
-      required: true
-    }
-  }
 })
 ",
             ],
@@ -212,7 +222,7 @@ export default defineComponent({
           },
           "offset": Object {
             "column": 0,
-            "line": 2,
+            "line": 0,
           },
         },
         Object {
@@ -224,11 +234,11 @@ export default defineComponent({
               "test.vue.template.compiled.ts",
             ],
             "sourcesContent": Array [
-              "import { toDisplayString as _toDisplayString, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock } from \\"vue\\"
+              "import { createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock } from \\"vue\\"
 
 export function render(_ctx, _cache) {
   return (_openBlock(), _createBlock(\\"div\\", null, [
-    _createVNode(\\"h1\\", null, _toDisplayString(_ctx.msg), 1 /* TEXT */)
+    _createVNode(\\"h1\\", null, \\"Hello world!\\")
   ]))
 }",
             ],
@@ -236,7 +246,7 @@ export function render(_ctx, _cache) {
           },
           "offset": Object {
             "column": 0,
-            "line": 28,
+            "line": 22,
           },
         },
       ],
