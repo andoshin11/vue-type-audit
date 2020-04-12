@@ -3,7 +3,7 @@
     <img src="./logo.png">
     <h1>Hello Vue 3!</h1>
     <button @click="inc">Clicked {{ count.length }} times.</button>
-    <HelloWorld :msg="3"/> <!-- `HelloWorld` component requires a string prop!! -->
+    <HelloWorld/> <!-- `HelloWorld` component requires a string prop!! -->
   </div>
 </template>
 

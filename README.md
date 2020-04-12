@@ -2,9 +2,9 @@
 
 A TypeScript error checker that supports Vue SFC(Single File Component).
 
-<img width="600" alt="Screen Shot 2020-04-10 at 14 56 25" src="https://user-images.githubusercontent.com/8381075/78966757-9f0df380-7b3b-11ea-88bd-6ff413eea264.png">
+<img width="600" alt="Screen Shot 2020-04-13 at 0 10 54" src="https://user-images.githubusercontent.com/8381075/79072323-69276580-7d1b-11ea-9112-f011f642fcde.png">
 
-<img width="600" alt="Screen Shot 2020-04-10 at 14 56 06" src="https://user-images.githubusercontent.com/8381075/78966740-974e4f00-7b3b-11ea-82fe-018123a6c13c.png">
+<img width="600" alt="Screen Shot 2020-04-13 at 0 11 18" src="https://user-images.githubusercontent.com/8381075/79072319-6593de80-7d1b-11ea-92ef-2b2e2c7d10d5.png">
 
 ## Current Limitation
 
