@@ -1,7 +1,8 @@
 {
   "name": "vue-type-audit",
   "version": "0.0.3",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "author": "andoshin11 <shinglish11@gmail.com>",
   "license": "MIT",
   "bin": {
