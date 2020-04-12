@@ -33,14 +33,20 @@ export class ProxyService {
   }
 
   getSemanticDiagnostics() {
-    const { ts, sourcemapEntry } = this
+    const { ts, sourcemapEntry, tsService } = this
+    const program = tsService.getProgram()
+    if (!program) {
+      throw new Error('could not create TS Program')
+    }
+    const typeChecker = program.getTypeChecker()
+
     const nativeSemanticDiagnostics = this.getNativeSemanticDiagnostics()
 
-    // Tweak positions for Vue files.
+    // Tweak diagnostics for Vue files.
     const actualDiagnostics = nativeSemanticDiagnostics.map(d => {
       if (!d.file || !isTSVueFile(d.file.fileName)) return d
 
-      return translateVuefileDiagnostic(d, sourcemapEntry, ts)
+      return translateVuefileDiagnostic(d, sourcemapEntry, typeChecker, ts)
     })
 
     return actualDiagnostics
