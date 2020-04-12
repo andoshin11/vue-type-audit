@@ -1,14 +1,10 @@
 import _ts from 'typescript'
-import * as fs from 'fs'
 import chalk from 'chalk'
-import { pos2location, hasDiagRange, toRelativePath, isTSVueFile, toRawVueFileName } from '../helpers'
-import { DiagnosticWithRange, SourcemapEntry } from '../types'
+import { pos2location, hasDiagRange, toRelativePath } from '../helpers'
+import { DiagnosticWithRange } from '../types'
 import { lineMark, pad, lineMarkForUnderline } from './helper'
-import { getOriginalPositionFor } from '../sourcemap'
 
 export class Reporter {
-  constructor(private sourcemapEntry: SourcemapEntry) {}
-
   report(msg: any) {
     console.log(msg)
   }
@@ -45,20 +41,8 @@ export class Reporter {
     let content = file && file.getFullText()
     if (!content) return
 
-    const fileName = file!.fileName
-
     let startLC = pos2location(content, start)
     let endLC = pos2location(content, start + length)
-
-    /**
-     * If diagnostic target is .vue file,
-     * then recover original position from sourcefile.
-     */
-    if (isTSVueFile(fileName)) {
-      startLC = getOriginalPositionFor(fileName, startLC, this.sourcemapEntry)!
-      endLC = getOriginalPositionFor(fileName, endLC, this.sourcemapEntry)!
-      content = fs.readFileSync(toRawVueFileName(fileName), 'utf8')
-    }
 
     /**
      * Example:
