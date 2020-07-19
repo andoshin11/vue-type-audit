@@ -1,14 +1,26 @@
 # vue-type-audit ![npm](https://img.shields.io/npm/v/vue-type-audit) ![GitHub](https://img.shields.io/github/license/andoshin11/vue-type-audit) ![CI Status](https://github.com/andoshin11/vue-type-audit/workflows/main/badge.svg)
 
 A TypeScript error checker that supports Vue SFC(Single File Component).
+The world's only tool that runs type checking for both child components' prop types and event handler types on Vue template.
 
-<img width="600" alt="Screen Shot 2020-04-13 at 0 10 54" src="https://user-images.githubusercontent.com/8381075/79072323-69276580-7d1b-11ea-9112-f011f642fcde.png">
+<img width="600" alt="Audit Result" src="https://user-images.githubusercontent.com/8381075/87878974-ba35ac80-ca22-11ea-9f3d-e013c07ac156.png">
 
-<img width="600" alt="Screen Shot 2020-04-13 at 0 11 18" src="https://user-images.githubusercontent.com/8381075/79072319-6593de80-7d1b-11ea-92ef-2b2e2c7d10d5.png">
+<br/>
+
+<img width="600" alt="App.vue" src="https://user-images.githubusercontent.com/8381075/87878993-d0436d00-ca22-11ea-98d7-fc3c120a27d1.png">
+
+<br/>
+
+<img width="600" alt="Counter.vue" src="https://user-images.githubusercontent.com/8381075/87879011-e18c7980-ca22-11ea-931e-6fe1b94556f5.png">
+
+<br/>
+
+<img width="600" alt="HelloWorld.vue" src="https://user-images.githubusercontent.com/8381075/87879015-ebae7800-ca22-11ea-96eb-166459dbb2fb.png">
+
 
 ## Current Limitation
 
-- supports [vue-next](https://github.com/vuejs/vue-next) only
+- only tested with [vue@3.0.0-rc.1](https://www.npmjs.com/package/vue/v/3.0.0-rc.1).
 - only tested with standard Vue SFC. (Class-Style component is not tested!)
 
 ## Example Usage
