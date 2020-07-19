@@ -40,9 +40,10 @@
     "@vue/compiler-dom": "^3.0.0-alpha.11",
     "@vue/compiler-sfc": "^3.0.0-alpha.11",
     "acorn": "^6.4.1",
-    "chalk": "^4.0.0",
+    "chalk": "^4.1.0",
     "commander": "^5.0.0",
     "kind-of": "^6.0.3",
+    "lodash": "^4.17.19",
     "prettier": "^2.0.4",
     "source-map": "^0.6.1",
     "vue-next": "^0.0.1"

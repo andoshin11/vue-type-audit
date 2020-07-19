@@ -3,10 +3,12 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "webpack --env.prod",
-    "type-audit": "../bin/audit.js run"
+    "type-audit": "../bin/audit.js run --debug"
   },
   "dependencies": {
-    "vue": "^3.0.0-alpha.10",
+    "kind-of": "^6.0.3",
+    "lodash": "^4.17.19",
+    "vue": "3.0.0-rc.1",
     "vue-next": "^0.0.1"
   },
   "devDependencies": {

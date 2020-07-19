@@ -25,7 +25,8 @@ function loadTS(currentDir: string) {
 commander
   .version(pkg.version)
   .command('run')
-  .action(async () => {
+  .option('-d, --debug', 'output extra debugging')
+  .action(async (args) => {
     try {
       const currentDir = process.cwd()
       const configPath = path.resolve(currentDir, 'tsconfig.json')
@@ -33,8 +34,9 @@ commander
         throw new Error(`could not find tsconfig.json at: ${currentDir}`)
       }
 
+      const isDebug = !!args.debug
       const localTS = loadTS(currentDir)
-      const service = ProxyService.fromConfigFile(configPath, localTS)
+      const service = ProxyService.fromConfigFile(configPath, localTS, isDebug)
       const diagnostics = service.getSemanticDiagnostics()
       service.reporter.reportDiagnostics(diagnostics)
       service.reporter.reportDiagnosticsSummary(diagnostics)
