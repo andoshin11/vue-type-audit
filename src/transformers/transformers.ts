@@ -1,7 +1,7 @@
 import _ts from 'typescript'
 import * as fs from 'fs'
 import { RawVueFileName, SourcemapEntry } from '../types'
-import { transformScript, parseExternalComponentsFromScrtipContent } from './script'
+import { transformScript, parseExternalComponentsFromScrtipContent, parseEventNamesFromScrtipContent } from './script'
 import { transformTemplate } from './template'
 import { toVueScriptFileName, toTSVueFIleName, toVueTemplateFileName, toCompiledVueTemplateFileName } from '../helpers'
 import { createTypeHelpers } from './createTypeHelpers'
@@ -26,7 +26,8 @@ export function transformVueFile(
   const templateBlock = transformTemplate(compiledVueTemplateFileName, templateContent)
 
   const externalComponents = parseExternalComponentsFromScrtipContent(scriptContent, ts)
-  const typeHelpersBlock = createTypeHelpers(externalComponents)
+  const eventNames = parseEventNamesFromScrtipContent(scriptContent, ts)
+  const typeHelpersBlock = createTypeHelpers(externalComponents, eventNames)
 
   const scriptBlockLinesNum = scriptBlock.transformed.split('\n').length
   const typeHelpersBlockLinesNum = typeHelpersBlock.split('\n').length
