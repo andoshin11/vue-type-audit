@@ -5,6 +5,7 @@ import { SourcemapEntry, DiagnosticWithRange } from '../types'
 import { readSystemFile } from './file'
 import { findNode } from '../ast'
 import { getOriginalPositionFor } from '../sourcemap'
+import { Logger } from '../logger'
 
 // TS diagnostic code
 const REQUIRE_PROPS_CODE = 2554
@@ -16,7 +17,7 @@ export const hasDiagRange = (diagnostic: _ts.Diagnostic): diagnostic is Diagnost
   return typeof start === 'number' && typeof length === 'number' && !!file
 }
 
-export const translateVuefileDiagnostic = (diagnostic: _ts.Diagnostic, sourcemapEntry: SourcemapEntry, typeChecker: _ts.TypeChecker, ts: typeof _ts): _ts.Diagnostic => {
+export const translateVuefileDiagnostic = (diagnostic: _ts.Diagnostic, sourcemapEntry: SourcemapEntry, typeChecker: _ts.TypeChecker, ts: typeof _ts, logger: Logger): _ts.Diagnostic => {
   const { file } = diagnostic
 
   if (!file || !isTSVueFile(file.fileName)) {
@@ -49,7 +50,7 @@ export const translateVuefileDiagnostic = (diagnostic: _ts.Diagnostic, sourcemap
   const originalEndPos = location2pos(originalContent, originalEndLC)
 
   // Translate Message
-  const translatedMessage = translateDiagnosticMessage(diagnostic, typeChecker, ts)
+  const translatedMessage = translateDiagnosticMessage(diagnostic, typeChecker, ts, logger)
 
   return {
     ...diagnostic,
@@ -60,8 +61,10 @@ export const translateVuefileDiagnostic = (diagnostic: _ts.Diagnostic, sourcemap
   }
 }
 
-const translateDiagnosticMessage = (diagnostic: DiagnosticWithRange, typeChecker: _ts.TypeChecker, ts: typeof _ts): string | _ts.DiagnosticMessageChain => {
+const translateDiagnosticMessage = (diagnostic: DiagnosticWithRange, typeChecker: _ts.TypeChecker, ts: typeof _ts, logger: Logger): string | _ts.DiagnosticMessageChain => {
   const { code, start, messageText, file } = diagnostic
+  logger.info(code)
+  logger.info(messageText)
   const translationTargetCodes = [REQUIRE_PROPS_CODE]
   let translatedMessage = messageText
 
@@ -89,12 +92,12 @@ const translateDiagnosticMessage = (diagnostic: DiagnosticWithRange, typeChecker
     if (!isExternalComponentNode) return translatedMessage
 
     const tagName = (typeInfo as _ts.LiteralType).value.toString()
-    translatedMessage = `Missing props for <${tagName}/> component.`
+    translatedMessage = `Missing required props for <${tagName}/> component.`
 
     // Check external component props type
-    const requiredPropsNaemes = findRequiredPropNames(file, tagName, typeChecker, ts)
-    if (requiredPropsNaemes.length >= 1) {
-      translatedMessage = `Missing props [${requiredPropsNaemes.join(',')}] for <${tagName}/> component.`
+    const requiredPropsNames = findRequiredPropNames(file, tagName, typeChecker, ts, logger)
+    if (requiredPropsNames != null && requiredPropsNames.length >= 1) {
+      translatedMessage = `Missing props [${requiredPropsNames.join(',')}] for <${tagName}/> component.`
     }
 
     return translatedMessage
@@ -104,7 +107,7 @@ const translateDiagnosticMessage = (diagnostic: DiagnosticWithRange, typeChecker
   return translatedMessage
 }
 
-export function findRequiredPropNames(file: _ts.SourceFile, componentName: string, typeChecker: _ts.TypeChecker, ts: typeof _ts) {
+export function findRequiredPropNames(file: _ts.SourceFile, componentName: string, typeChecker: _ts.TypeChecker, ts: typeof _ts, logger: Logger): null | string[] {
   const findPropsDict = (node: _ts.Node): _ts.Node | undefined => {
     if (ts.isTypeAliasDeclaration(node) && node.name.escapedText.toString() === '___ExternalComponentsProps') {
       return node
@@ -122,7 +125,9 @@ export function findRequiredPropNames(file: _ts.SourceFile, componentName: strin
   const targetComponent = findTargetProperty(propsDict)!
   const propType = typeChecker.getTypeAtLocation(targetComponent)
 
-  const requiredPropNames = typeChecker.typeToString(propType).split('|').map(s => s.trim())
+  const typeString = typeChecker.typeToString(propType)
+  if (typeString === 'never') return null
+  const requiredPropNames = typeString.split('|').map(s => s.trim())
 
   return requiredPropNames
 }
