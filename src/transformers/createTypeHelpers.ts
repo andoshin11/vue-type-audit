@@ -14,7 +14,9 @@ type __ExternalComponentsProps = {
 export default __Component;
 type __ComponentType = ClassInstance<typeof __Component>;
 
-declare function _createVNode<N extends (keyof __ExternalComponents | _VNodeTypes | _ClassComponent), C = N extends keyof __ExternalComponents ?  __ExternalComponents[N] : unknown>(type: N, ...args: (N extends keyof __ExternalComponents ? {} extends PropTypes<C> ? [(_VNodeProps & PropTypes<C>)?, unknown?, number?, (string[] | null)?] : [(_VNodeProps & PropTypes<C>), unknown?, number?, (string[] | null)?] : [((_Data & _VNodeProps) | null)?, unknown?, number?, (string[] | null)?])): _VNode;
+type __PropArg<N> = N extends keyof __ExternalComponents ?  PropTypes<__ExternalComponents[N]> : _Data
+
+declare function _createVNode<N extends (keyof __ExternalComponents | _VNodeTypes | _ClassComponent)>(type: N, ...args: (N extends keyof __ExternalComponents ? [__ExternalComponentsProps[N]] extends [never] ? [(_VNodeProps & __PropArg<N>)?, unknown?, number?, (string[] | null)?, boolean?] : [(_VNodeProps & __PropArg<N>), unknown?, number?, (string[] | null)?, boolean?] : [((_Data & _VNodeProps) | null)?, unknown?, number?, (string[] | null)?, boolean?])): _VNode;
 ///////////////////// END: Type Helpers /////////////////////
 `
 }

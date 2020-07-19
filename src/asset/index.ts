@@ -6,7 +6,15 @@ import { ComponentPublicInstance, VNodeProps, VNode, VNodeTypes, ComponentOption
 
 export type ClassInstance<T> = T extends new (...args: any[]) => infer U ? U : never;
 
-export type PropTypes<C> = C extends ComponentPublicInstance<infer P, infer B, infer D, infer C, infer M> ? P : never
+interface _AllowedComponentProps {
+  class?: unknown;
+  style?: unknown;
+}
+
+interface _ComponentCustomProps {
+}
+
+export type PropTypes<C> = C extends ComponentPublicInstance<infer P, infer B, infer D, infer C, infer M, infer E, infer PublicProps, infer Options> ? (P & PublicProps) extends (VNodeProps & _AllowedComponentProps & _ComponentCustomProps & infer R) ? R : {} : never
 
 type RequiredProps<T> = {
   [K in keyof T]: undefined extends T[K] ? never : K
