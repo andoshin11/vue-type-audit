@@ -30,7 +30,7 @@ See [example](./example)
 ## Install
 
 ```sh
-$ yarn install vue-type-audit
+$ yarn add vue-type-audit
 ```
 
 ## How to use
