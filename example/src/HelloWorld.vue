@@ -1,5 +1,6 @@
 <template>
   <div>
+    <label>{{ label }}</label>
     <h1>{{ msg }}</h1>
   </div>
 </template>
@@ -12,6 +13,10 @@ export default defineComponent({
     msg: {
       type: String,
       required: true
+    },
+    label: {
+      type: String,
+      default: 'Default Label'
     }
   }
 })
