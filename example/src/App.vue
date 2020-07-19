@@ -2,28 +2,35 @@
   <div>
     <img src="./logo.png">
     <h1>Hello Vue 3!</h1>
-    <button @click="inc">Clicked {{ count.length }} times.</button>
+    <h2>Clicked {{ count.length }} times.</h2>
     <HelloWorld/> <!-- `HelloWorld` component requires a string prop!! -->
+    <Counter @change="handleChange"/>
+    <Counter @change="doSomethingToString"/>
+    <Counter @changed="handleChange"/>
   </div>
 </template>
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue'
 import HelloWorld from './HelloWorld.vue'
+import Counter from './Counter.vue'
 
 export default defineComponent({
   components: {
-    HelloWorld
+    HelloWorld,
+    Counter
   },
   setup(props) {
     const count = ref(0)
-    const inc = () => {
-      count.value++
+    const handleChange = (val: number) => {
+      count.value = val
     }
+    const doSomethingToString = (val: string) => val.length
     console.log(count.value.length)
     return {
       count,
-      inc
+      handleChange,
+      doSomethingToString
     }
   }
 })
