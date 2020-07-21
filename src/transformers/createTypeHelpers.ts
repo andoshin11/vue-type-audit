@@ -25,8 +25,9 @@ export default ___Component;
 
 type __PropArg<N> = N extends keyof __ExternalComponents ?  PropTypes<__ExternalComponents[N]> : _Data
 type __EmitArg<N> = N extends keyof __ExternalComponents ? __ExternalComponents[N]['$options']['__emitHandlerTypes'] : {}
+type __DOMArg<N> = N extends string ? N extends keyof __ExternalComponents ? {} : JSX.IntrinsicElements[N] : {}
 
-declare function _createVNode<N extends (keyof __ExternalComponents | _VNodeTypes | _ClassComponent)>(type: N, ...args: (N extends keyof __ExternalComponents ? true extends isNeverType<__ExternalComponentsProps[N]> ? [(_VNodeProps & __PropArg<N> & __EmitArg<N>)?, unknown?, number?, (string[] | null)?, boolean?] : [(_VNodeProps & __PropArg<N> & __EmitArg<N>), unknown?, number?, (string[] | null)?, boolean?] : [((_Data & _VNodeProps) | null)?, unknown?, number?, (string[] | null)?, boolean?])): _VNode;
+declare function _createVNode<N extends (keyof __ExternalComponents | _VNodeTypes | _ClassComponent)>(type: N, ...args: (N extends keyof __ExternalComponents ? true extends isNeverType<__ExternalComponentsProps[N]> ? [(_VNodeProps & __PropArg<N> & __EmitArg<N>)?, unknown?, number?, (string[] | null)?, boolean?] : [(_VNodeProps & __PropArg<N> & __EmitArg<N>), unknown?, number?, (string[] | null)?, boolean?] : [((_Data & _VNodeProps & __DOMArg<N>) | null)?, unknown?, number?, (string[] | null)?, boolean?])): _VNode;
 ///////////////////// END: Type Helpers /////////////////////
 `
 }
