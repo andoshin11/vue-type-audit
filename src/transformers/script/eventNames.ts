@@ -7,18 +7,34 @@ export function parseEventNamesFromScrtipContent(scriptContent: string, ts: type
   const node = findEmits(scriptContent, ts)
   if (!node) return []
 
-  const emits = node.properties.map(p => {
-    if (ts.isPropertyAssignment(p) && ts.isIdentifier(p.name)) {
-      const eventName = p.name.escapedText.toString()
-      return eventName
-    }
-    return ''
-  }).filter(Boolean)
+  if (ts.isObjectLiteralExpression(node)) {
+    const emits = node.properties.map(p => {
+      if (ts.isPropertyAssignment(p) && ts.isIdentifier(p.name)) {
+        const eventName = p.name.escapedText.toString()
+        return eventName
+      }
+      return ''
+    }).filter(Boolean)
 
-  return emits
+    return emits
+  } else if (ts.isArrayLiteralExpression(node)) {
+    const emits = node.elements.map(e => {
+      if (ts.isStringLiteral(e)) {
+        const eventName = e.text
+        return eventName
+      } else {
+        return ''
+      }
+    }).filter(Boolean)
+
+    return emits
+  } else {
+    return []
+  }
+
 }
 
-function findEmits(scriptContent: string, ts: typeof _ts): _ts.ObjectLiteralExpression | undefined {
+function findEmits(scriptContent: string, ts: typeof _ts): _ts.ObjectLiteralExpression | _ts.ArrayLiteralExpression | undefined {
   const node = createSourceFile(ts, scriptContent)
   const exportAssignment = findTargetSyntaxKind(ts, node, ts.SyntaxKind.ExportAssignment)
 
@@ -54,4 +70,5 @@ function findEmits(scriptContent: string, ts: typeof _ts): _ts.ObjectLiteralExpr
 
   // Get external components
   return findTargetSyntaxKind(ts, emitsProperty, ts.SyntaxKind.ObjectLiteralExpression)
+    || findTargetSyntaxKind(ts, emitsProperty, ts.SyntaxKind.ArrayLiteralExpression)
 }

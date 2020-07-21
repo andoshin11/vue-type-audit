@@ -10,7 +10,8 @@ import { defineComponent, reactive } from "vue";
 
 export default defineComponent({
   emits: {
-    change: (val: number) => val < 10
+    change: (val: number) => val < 10,
+    input: null
   },
   props: {
     initialValue: {

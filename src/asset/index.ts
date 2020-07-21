@@ -6,6 +6,8 @@ import { ComponentPublicInstance, VNodeProps, VNode, VNodeTypes, ComponentOption
 
 export type ClassInstance<T> = T extends new (...args: any[]) => infer U ? U : never;
 
+export type isNeverType<T> = [T] extends [never] ? true : false
+
 interface _AllowedComponentProps {
   class?: unknown;
   style?: unknown;
@@ -18,11 +20,13 @@ export type PropTypes<C> = C extends ComponentPublicInstance<infer P, infer B, i
 
 type EmitTypes<C> = C extends ComponentPublicInstance<infer P, infer B, infer D, infer C, infer M, infer E, infer PublicProps, infer Options> ? E : never
 
-type ToHandlerType<F extends Function> = F extends (...args: infer A) => boolean ? (...args: A) => void : never;
+type ElementType<T> = T extends (infer R)[] ? R : never
 
-export type WithEmitType<T, D extends Record<string, keyof EmitTypes<ClassInstance<T>>>> = {
+export type ToHandlerType<F> = F extends (...args: infer A) => boolean ? (...args: A) => void : null extends F ? (...args: any) => void : never;
+
+export type WithEmitType<T, D extends Record<string, (keyof EmitTypes<ClassInstance<T>>) | (ElementType<EmitTypes<ClassInstance<T>>>)>> = {
   __emitHandlerTypes: {
-    [K in keyof D]: ToHandlerType<EmitTypes<ClassInstance<T>>[D[K]]>
+    [K in keyof D]?: false extends isNeverType<ElementType<EmitTypes<ClassInstance<T>>>> ? (...args: any) => any : D[K] extends keyof EmitTypes<ClassInstance<T>> ? ToHandlerType<EmitTypes<ClassInstance<T>>[D[K]]> : never
   }
 }
 

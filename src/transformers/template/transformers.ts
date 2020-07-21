@@ -19,7 +19,7 @@ export function transformTemplate(
     transformed = transformed.replace(/_resolveComponent/, '#resolveComponent')
 
     // strip export assignment
-    transformed = transformed.replace('export function render(_ctx, _cache)', 'function render(_ctx: __ComponentType)')
+    transformed = transformed.replace('export function render(_ctx, _cache)', 'function render(_ctx: ClassInstance<typeof __Component>)')
 
     transformed
     .split('\n')
