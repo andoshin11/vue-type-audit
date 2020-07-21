@@ -1,4 +1,4 @@
-# vue-type-audit ![npm](https://img.shields.io/npm/v/vue-type-audit) ![GitHub](https://img.shields.io/github/license/andoshin11/vue-type-audit) ![CI Status](https://github.com/andoshin11/vue-type-audit/workflows/main/badge.svg)
+# vue-type-audit ![npm](https://img.shields.io/npm/v/vue-type-audit) ![GitHub](https://img.shields.io/github/license/andoshin11/vue-type-audit) ![CI Status](https://github.com/andoshin11/vue-type-audit/workflows/main/badge.svg) ![CodeQL](https://github.com/andoshin11/vue-type-audit/workflows/CodeQL/badge.svg)
 
 A TypeScript error checker that supports Vue SFC(Single File Component).
 The world's only tool that runs type checking for both child components' prop types and event handler types on Vue template.
