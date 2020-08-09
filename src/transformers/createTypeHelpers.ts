@@ -5,7 +5,7 @@ function camelize(str: string) {
 export function createTypeHelpers(externalComponents: Record<string, string>, eventNames: string[]) {
   return `
 ///////////////////// START: Type Helpers ///////////////////
-import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredPropNames, WithEmitType, MixIntoComponent, isNeverType } from "__GLOBAL_TYPES";
+import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredPropNames, WithEmitType, MixIntoComponent, isNeverType } from "^__GLOBAL_TYPES";
 
 type EVENT_DICT = {
 ${eventNames.map(n => `  on${camelize(n)}: "${n}";`).join('\n')}

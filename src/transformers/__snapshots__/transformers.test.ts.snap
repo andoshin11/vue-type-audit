@@ -25,7 +25,7 @@ const __Component = defineComponent({
 
 
 ///////////////////// START: Type Helpers ///////////////////
-import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredPropNames, WithEmitType, MixIntoComponent, isNeverType } from \\"__GLOBAL_TYPES\\";
+import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredPropNames, WithEmitType, MixIntoComponent, isNeverType } from \\"^__GLOBAL_TYPES\\";
 
 type EVENT_DICT = {
 
@@ -79,7 +79,7 @@ const __Component = defineComponent({
 
 
 ///////////////////// START: Type Helpers ///////////////////
-import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredPropNames, WithEmitType, MixIntoComponent, isNeverType } from \\"__GLOBAL_TYPES\\";
+import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredPropNames, WithEmitType, MixIntoComponent, isNeverType } from \\"^__GLOBAL_TYPES\\";
 
 type EVENT_DICT = {
 
@@ -122,7 +122,7 @@ const __Component = defineComponent({
 
 
 ///////////////////// START: Type Helpers ///////////////////
-import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredPropNames, WithEmitType, MixIntoComponent, isNeverType } from \\"__GLOBAL_TYPES\\";
+import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredPropNames, WithEmitType, MixIntoComponent, isNeverType } from \\"^__GLOBAL_TYPES\\";
 
 type EVENT_DICT = {
 
