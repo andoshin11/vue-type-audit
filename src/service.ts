@@ -16,10 +16,10 @@ export class Service {
   sourcemapEntry: SourcemapEntry = new Map()
 
   constructor(public fileNames: string[], private compilerOptions: _ts.CompilerOptions, private ts: typeof _ts, debug: boolean = false) {
-    const host = createHost(fileNames, compilerOptions, this.scriptVersions, this.sourcemapEntry, ts)
+    this.logger = new Logger(debug ? 'info' : 'silent')
+    const host = createHost(fileNames, compilerOptions, this.scriptVersions, this.sourcemapEntry, ts, this.logger)
     this.tsService = createService(host, ts)
     this.reporter = new Reporter()
-    this.logger = new Logger(debug ? 'info' : 'silent')
   }
 
   static fromConfigFile(configPath: string, ts: typeof _ts, debug: boolean = false): Service {

@@ -32,7 +32,15 @@ export const toTransformedCompiledVueTemplateFileName = (
 
 export const toTransformedVueScriptFileName = (fileName: VueScriptFileName) => fileName.replace(/\.ts$/, '.transformed.ts') as TransformedVueScriptFileName
 
-export const toRawVueFileName = (fileName: TSVueFileName) => fileName.replace(/\.ts$/, '')
+export const toRawVueFileName = (fileName: TSVueFileName | CompiledVueTemplateFileName): RawVueFileName => {
+  if (isTSVueFile(fileName)) {
+    return fileName.replace(/\.ts$/, '') as RawVueFileName
+  } else if (isCompiledVueTemplateFile(fileName)) {
+    return fileName.replace(/\.template\.compiled\.ts$/, '') as RawVueFileName
+  } else {
+    throw new Error('could not trnsform to raw vue file name')
+  }
+}
 
 /**
  * User Type Guards
