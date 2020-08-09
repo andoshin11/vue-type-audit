@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`audit should match snapshot 1`] = `
+Array [
+  Object {
+    "category": 1,
+    "code": 2339,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/App.vue",
+    "length": 6,
+    "messageText": "Property 'length' does not exist on type 'number'.",
+    "start": 907,
+  },
+  Object {
+    "category": 1,
+    "code": 2322,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/App.vue",
+    "length": 4,
+    "messageText": "Type 'number' is not assignable to type 'string | undefined'.",
+    "start": 80,
+  },
+  Object {
+    "category": 1,
+    "code": 2339,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/App.vue",
+    "length": 6,
+    "messageText": "Property 'length' does not exist on type 'number'.",
+    "start": 123,
+  },
+  Object {
+    "category": 1,
+    "code": 2554,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/App.vue",
+    "length": 13,
+    "messageText": "Missing props [\\"msg\\"] for <HelloWorld/> component.",
+    "start": 149,
+  },
+  Object {
+    "category": 1,
+    "code": 2322,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/App.vue",
+    "length": 6,
+    "messageText": "Type '(val: string) => number' is not assignable to type '(val: number) => void'.
+  Types of parameters 'val' and 'val' are incompatible.
+    Type 'number' is not assignable to type 'string'.",
+    "start": 306,
+  },
+  Object {
+    "category": 1,
+    "code": 2345,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/App.vue",
+    "length": 21,
+    "messageText": "Argument of type '{ onChanged: (val: number) => void; }' is not assignable to parameter of type 'VNodeProps & { initialValue?: number | undefined; } & { onChange?: ((val: number) => void) | undefined; onInput?: ((...args: any) => void) | undefined; }'.
+  Object literal may only specify known properties, but 'onChanged' does not exist in type 'VNodeProps & { initialValue?: number | undefined; } & { onChange?: ((val: number) => void) | undefined; onInput?: ((...args: any) => void) | undefined; }'. Did you mean to write 'onChange'?",
+    "start": 392,
+  },
+  Object {
+    "category": 1,
+    "code": 2769,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/Counter.vue",
+    "length": 22,
+    "messageText": "No overload matches this call.
+  Overload 1 of 2, '(event: \\"input\\", ...args: any[]): void', gave the following error.
+    Argument of type '\\"change\\"' is not assignable to parameter of type '\\"input\\"'.
+  Overload 2 of 2, '(event: \\"change\\", val: number): void', gave the following error.
+    Argument of type '\\"hoge\\"' is not assignable to parameter of type 'number'.",
+    "start": 580,
+  },
+]
+`;

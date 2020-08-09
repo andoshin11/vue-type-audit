@@ -2,7 +2,7 @@ import _ts from 'typescript'
 import commander from 'commander'
 import * as path from 'path'
 import * as fs from 'fs'
-import { ProxyService } from '../proxyService'
+import { Service } from '../service'
 
 const pkg = require('../../package.json')
 
@@ -36,7 +36,7 @@ commander
 
       const isDebug = !!args.debug
       const localTS = loadTS(currentDir)
-      const service = ProxyService.fromConfigFile(configPath, localTS, isDebug)
+      const service = Service.fromConfigFile(configPath, localTS, isDebug)
       const diagnostics = service.getSemanticDiagnostics()
       service.reporter.reportDiagnostics(diagnostics)
       service.reporter.reportDiagnosticsSummary(diagnostics)
