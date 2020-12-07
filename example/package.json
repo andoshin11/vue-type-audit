@@ -11,6 +11,7 @@
     "lodash": "^4.17.19",
     "vue": "3.0.0-rc.1",
     "vue-next": "^0.0.1",
+    "vue-ts-plugin": "^0.1.0",
     "vue-type-audit": "^0.1.1"
   },
   "devDependencies": {

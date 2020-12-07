@@ -29,7 +29,7 @@ export default defineComponent({
     }
     const doSomethingToString = (val: string) => val.length
     console.log(count.value.length)
-    const doNothing = () => void
+    const doNothing = () => {}
     return {
       count,
       handleChange,
