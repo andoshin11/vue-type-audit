@@ -86,7 +86,7 @@ export const createHost = (fileNames: string[], compilerOptions: _ts.CompilerOpt
       let content = readSystemFile(fileName)!
 
       if (isRawVueFile(fileName)) {
-        content = transformVueFile(fileName, content, sourcemapEntry, ts)
+        content = transformVueFile(fileName, content, sourcemapEntry, ts).transformedContent
         // fs.writeFileSync(fileName + '.ts', content)
       }
 

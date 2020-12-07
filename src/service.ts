@@ -8,7 +8,7 @@ import { isTSVueFile, translateTSVuefileDiagnostic } from './helpers'
 import { Logger } from './logger'
 
 export class Service {
-  private tsService: _ts.LanguageService
+  public tsService: _ts.LanguageService
   private logger: Logger
 
   reporter: Reporter

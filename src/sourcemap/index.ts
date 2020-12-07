@@ -1,12 +1,25 @@
 import { SourceMapConsumer, LineRange } from 'source-map'
 import { SourcemapEntry, TSVueFileName, Location, VueScriptFileName, CompiledVueTemplateFileName, VueTemplateFileName, RawVueFileName } from '../types'
-import { isRawVueFile, isVueScriptFile, isCompiledVueTemplateFile, isVueTemplateFile, isTSVueFile, toVueTemplateFileName, toVueScriptFileName, toCompiledVueTemplateFileName, toTransformedCompiledVueTemplateFileName, toTSVueFIleName, toRawVueFileName } from '../helpers'
+import {
+  isRawVueFile,
+  isVueScriptFile,
+  isCompiledVueTemplateFile,
+  isVueTemplateFile,
+  isTSVueFile,
+  toVueTemplateFileName,
+  toVueScriptFileName,
+  toCompiledVueTemplateFileName,
+  toTSVueFIleName,
+  toRawVueFileName
+} from '../helpers'
 
 export function getOriginalPositionFor(
   fileName: TSVueFileName | VueScriptFileName | CompiledVueTemplateFileName | VueTemplateFileName,
   location: Location,
-  sourcemapEntry: SourcemapEntry
+  sourcemapEntry: SourcemapEntry,
+  retry: boolean = false
 ): Location {
+  // console.log('recovering original position for: ' + fileName)
   // Note: TypeScript counts lines from 0, while sourcemap v3 treats lines with 1-basis.
   if (isTSVueFile(fileName)) {
     location = { line: location.line + 1, column: location.column }
@@ -18,7 +31,7 @@ export function getOriginalPositionFor(
   const consumer = new SourceMapConsumer(map)
   const result = consumer.originalPositionFor(location)
 
-  if (result) {
+  if (result && result.source) {
     const { source, line, column } = result
 
     if (isRawVueFile(source)) {
@@ -36,7 +49,7 @@ export function getOriginalPositionFor(
 
     if (isCompiledVueTemplateFile(source)) {
       // proxy column for a technical reason
-      return getOriginalPositionFor(source, { line, column: location.column }, sourcemapEntry)
+      return getOriginalPositionFor(source, { line, column: location.column }, sourcemapEntry, true)
     }
 
     if (isVueTemplateFile(source)) {
@@ -45,6 +58,11 @@ export function getOriginalPositionFor(
 
     throw new Error('could not resolve position from sourcemap for ' + fileName)
   } else {
+    console.log('throwing error for: '+ fileName)
+    console.log(JSON.stringify(location))
+    if (retry) {
+      return getOriginalPositionFor(fileName, { ...location, line: location.line - 2 }, sourcemapEntry)
+    }
     throw new Error('could not resolve position from sourcemap for ' + fileName)
   }
 }
@@ -55,6 +73,10 @@ export function getGeneratedPositionFor(
   sourcemapEntry: SourcemapEntry
 ): Location {
   if (isRawVueFile(fileName)) {
+
+    // Note: TS Server counts lines from 0, while sourcemap v3 treats lines with 1-basis.
+    location = { line: location.line + 1, column: location.column }
+
     // determin block
     const script = sourcemapEntry.get(toVueScriptFileName(fileName))
     if (script) {
@@ -66,7 +88,8 @@ export function getGeneratedPositionFor(
       // forward column due to technical resons
       if (result.line !== null && result.column !== null) {
         // for script file, this result eqauls to final result
-        return { line: result.line, column: location.column }
+        // Note: TypeScript counts lines from 0, while sourcemap v3 treats lines with 1-basis.
+        return { line: result.line - 1, column: location.column }
       }
     }
 
@@ -108,7 +131,8 @@ export function getGeneratedPositionFor(
       const offset = templateSection.offset.line
       const result = {
         ...location,
-        line: location.line + offset,
+        // Note: TypeScript counts lines from 0, while sourcemap v3 treats lines with 1-basis.
+        line: location.line + offset - 1,
       }
       return result
 
