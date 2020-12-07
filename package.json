@@ -37,12 +37,12 @@
     "glob": "^7.1.6",
     "jest": "^25.2.7",
     "ts-jest": "^25.3.1",
-    "typescript": "^3.9.7"
+    "typescript": "4.1.2"
   },
   "dependencies": {
-    "@vue/compiler-core": "^3.0.0-alpha.11",
-    "@vue/compiler-dom": "^3.0.0-alpha.11",
-    "@vue/compiler-sfc": "^3.0.0-alpha.11",
+    "@vue/compiler-core": "^3.0.4",
+    "@vue/compiler-dom": "^3.0.4",
+    "@vue/compiler-sfc": "^3.0.4",
     "acorn": "^6.4.1",
     "chalk": "^4.1.0",
     "commander": "^5.0.0",
@@ -50,7 +50,6 @@
     "lodash": "^4.17.19",
     "prettier": "^2.0.4",
     "source-map": "^0.6.1",
-    "vue": "3.0.0-rc.1",
-    "vue-next": "^0.0.1"
+    "vue": "^3.0.4"
   }
 }
