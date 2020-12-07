@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`transformers transformScript 1`] = `
-"
+Object {
+  "transformedContent": "
 import { ref, defineComponent } from 'vue'
 import HelloWorld from './HelloWorld.vue'
 
@@ -61,11 +62,13 @@ function render(_ctx: ClassInstance<typeof __Component>) {
     _createVNode(\\"button\\", { onClick: _ctx.inc }, \\"Clicked \\" + _toDisplayString(_ctx.count.length) + \\" times.\\", 9 /* TEXT, PROPS */, [\\"onClick\\"]),
     _createVNode(_component_HelloWorld)
   ]))
-}"
+}",
+}
 `;
 
 exports[`transformers transformScript 2`] = `
-"
+Object {
+  "transformedContent": "
 import { defineComponent } from 'vue'
 
 const __Component = defineComponent({
@@ -110,11 +113,13 @@ function render(_ctx: ClassInstance<typeof __Component>) {
   return (_openBlock(), _createBlock(\\"div\\", null, [
     _createVNode(\\"h1\\", null, _toDisplayString(_ctx.msg), 1 /* TEXT */)
   ]))
-}"
+}",
+}
 `;
 
 exports[`transformers transformScript 3`] = `
-"
+Object {
+  "transformedContent": "
 import { defineComponent } from 'vue'
 
 const __Component = defineComponent({
@@ -153,7 +158,8 @@ function render(_ctx: ClassInstance<typeof __Component>) {
   return (_openBlock(), _createBlock(\\"div\\", null, [
     _createVNode(\\"h1\\", null, \\"Hello world!\\")
   ]))
-}"
+}",
+}
 `;
 
 exports[`transformers transformScript 4`] = `

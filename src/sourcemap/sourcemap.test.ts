@@ -13,7 +13,7 @@ describe('sourcemap', () => {
   test('getOriginalPositionFor', () => {
     // Prepare
     const sourcemapEntry: SourcemapEntry = new Map()
-    const transformed = transformVueFile('test.vue' as RawVueFileName, sampleComponent, sourcemapEntry, ts)
+    const transformed = transformVueFile('test.vue' as RawVueFileName, sampleComponent, sourcemapEntry, ts).transformedContent
     expect(transformed).toBe(sampleTransformed)
 
     const cases: Array<{ location: Location, expected: Location }> = [
@@ -55,7 +55,7 @@ describe('sourcemap', () => {
 
   test('getGeneratedPositionFor', () => {
     const sourcemapEntry: SourcemapEntry = new Map()
-    const transformed = transformVueFile('test.vue' as RawVueFileName, sampleComponent, sourcemapEntry, ts)
+    const transformed = transformVueFile('test.vue' as RawVueFileName, sampleComponent, sourcemapEntry, ts).transformedContent
     expect(transformed).toBe(sampleTransformed)
 
     const cases: Array<{ location: Location, expected: Location }> = [
