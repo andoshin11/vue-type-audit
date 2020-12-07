@@ -4,7 +4,7 @@
     <h1>Hello Vue 3!</h1>
     <a :href="2">Link</a>
     <h2>Clicked {{ count.length }} times.</h2>
-    <HelloWorld/> <!-- `HelloWorld` component requires a string prop!! -->
+    <HelloWorld/>
     <Counter/>
     <Counter @change="handleChange" @input="doNothing"/>
     <Counter @change="doSomethingToString"/> <!-- should throw handler type error -->

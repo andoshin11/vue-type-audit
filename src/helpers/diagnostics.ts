@@ -1,7 +1,7 @@
 import _ts from 'typescript'
-import { isTSVueFile, toRawVueFileName } from './path'
-import { pos2location, createSourceFile, location2pos } from './node'
-import { SourcemapEntry, DiagnosticWithRange } from '../types'
+import { isTSVueFile, toRawVueFileName, isRawVueFile, toTSVueFIleName } from './path'
+import { pos2location, createSourceFile, location2pos, getFullTextFromSnapshot } from './node'
+import { SourcemapEntry, DiagnosticWithRange, FileEntry } from '../types'
 import { readSystemFile } from './file'
 import { findNode } from '../ast'
 import { getOriginalPositionFor } from '../sourcemap'
@@ -17,10 +17,10 @@ export const hasDiagRange = (diagnostic: _ts.Diagnostic): diagnostic is Diagnost
   return typeof start === 'number' && typeof length === 'number' && !!file
 }
 
-export const translateVuefileDiagnostic = (diagnostic: _ts.Diagnostic, sourcemapEntry: SourcemapEntry, typeChecker: _ts.TypeChecker, ts: typeof _ts, logger: Logger): _ts.Diagnostic => {
+export const translateTSVuefileDiagnostic = (diagnostic: _ts.Diagnostic, sourcemapEntry: SourcemapEntry, typeChecker: _ts.TypeChecker, ts: typeof _ts, logger?: Logger, fileEntry?: Map<string, { scriptSnapshot: _ts.IScriptSnapshot }>): _ts.Diagnostic => {
   const { file } = diagnostic
 
-  if (!file || !isTSVueFile(file.fileName)) {
+  if (!file || (!isTSVueFile(file.fileName) && !isRawVueFile(file.fileName))) {
     throw new Error('Invalid diagnostic format')
   }
 
@@ -30,8 +30,19 @@ export const translateVuefileDiagnostic = (diagnostic: _ts.Diagnostic, sourcemap
   }
 
   // Update sourcefile
-  const rawVueFileName = toRawVueFileName(file.fileName)
-  const originalContent = readSystemFile(rawVueFileName)
+  const tsVueFileName = isTSVueFile(file.fileName) ? file.fileName : toTSVueFIleName(file.fileName)
+  const rawVueFileName = isRawVueFile(file.fileName) ? file.fileName : toRawVueFileName(file.fileName)
+  let originalContent: string | undefined
+  if (fileEntry) {
+    const file = fileEntry.get(rawVueFileName)
+    if (file) {
+      originalContent = getFullTextFromSnapshot(file.scriptSnapshot)
+    } else {
+      originalContent = readSystemFile(rawVueFileName)
+    }
+  } else {
+    originalContent = readSystemFile(rawVueFileName)
+  }
   if (!originalContent) {
     throw new Error(`could not find file: ${rawVueFileName}`)
   }
@@ -43,14 +54,15 @@ export const translateVuefileDiagnostic = (diagnostic: _ts.Diagnostic, sourcemap
   const startLC = pos2location(content, start)
   const endLC = pos2location(content, start + length)
 
-  const originalStartLC = getOriginalPositionFor(file.fileName, startLC, sourcemapEntry)
-  const originalEndLC = getOriginalPositionFor(file.fileName, endLC, sourcemapEntry)
+  const originalStartLC = getOriginalPositionFor(tsVueFileName, startLC, sourcemapEntry)
+  const originalEndLC = getOriginalPositionFor(tsVueFileName, endLC, sourcemapEntry)
 
   const originalStartPos = location2pos(originalContent, originalStartLC)
   const originalEndPos = location2pos(originalContent, originalEndLC)
 
   // Translate Message
   const translatedMessage = translateDiagnosticMessage(diagnostic, typeChecker, ts, logger)
+  // console.log(ts.flattenDiagnosticMessageText(translatedMessage, '\n'))
 
   return {
     ...diagnostic,
@@ -61,10 +73,12 @@ export const translateVuefileDiagnostic = (diagnostic: _ts.Diagnostic, sourcemap
   }
 }
 
-const translateDiagnosticMessage = (diagnostic: DiagnosticWithRange, typeChecker: _ts.TypeChecker, ts: typeof _ts, logger: Logger): string | _ts.DiagnosticMessageChain => {
+export const translateDiagnosticMessage = (diagnostic: DiagnosticWithRange, typeChecker: _ts.TypeChecker, ts: typeof _ts, logger?: Logger): string | _ts.DiagnosticMessageChain => {
   const { code, start, messageText, file } = diagnostic
-  logger.info(code)
-  logger.info(messageText)
+  if (logger) {
+    logger.info(code)
+    logger.info(messageText)
+  }
   const translationTargetCodes = [REQUIRE_PROPS_CODE]
   let translatedMessage = messageText
 
@@ -107,7 +121,7 @@ const translateDiagnosticMessage = (diagnostic: DiagnosticWithRange, typeChecker
   return translatedMessage
 }
 
-export function findRequiredPropNames(file: _ts.SourceFile, componentName: string, typeChecker: _ts.TypeChecker, ts: typeof _ts, logger: Logger): null | string[] {
+export function findRequiredPropNames(file: _ts.SourceFile, componentName: string, typeChecker: _ts.TypeChecker, ts: typeof _ts, logger?: Logger): null | string[] {
   const findPropsDict = (node: _ts.Node): _ts.Node | undefined => {
     if (ts.isTypeAliasDeclaration(node) && node.name.escapedText.toString() === '___ExternalComponentsProps') {
       return node

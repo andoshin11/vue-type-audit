@@ -6,7 +6,16 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "baseUrl": ".",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "plugins": [
+      {
+        "name":  "../../../../../../../../Users/shin/dev/vue-ts",
+        "features": {
+          "diagnostics": true
+        }
+      }
+    ]
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

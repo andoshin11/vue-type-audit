@@ -27,8 +27,7 @@ export default defineComponent({
     const increment = () => {
       state.count++;
       emit("change", state.count);
-      emit("change", 'hoge');
-      emit('change', 'fuga')
+      emit("change", 'hoge')
     };
 
     return {

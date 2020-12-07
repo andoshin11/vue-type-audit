@@ -1129,6 +1129,11 @@ cyclist@^1.0.1:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
 
+de-indent@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
+  integrity sha1-sgOOhG3DO6pXlhKNCAS0VbjB4h0=
+
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -1918,6 +1923,11 @@ hash.js@^1.0.0, hash.js@^1.0.3:
   dependencies:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
+
+he@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
+  integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
@@ -4286,6 +4296,21 @@ vue-next@^0.0.1:
   integrity sha512-y1ezq/cCvvCp5YqDzoOFiyiWLl+WmsMyLICGOW/y7EsENrJsJ2Uqa+sKTT2F53EF/iLx2QhU6qderjoVWU5RJw==
   dependencies:
     source-map "^0.7.3"
+
+vue-template-compiler@^2.2.1:
+  version "2.6.11"
+  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.11.tgz#c04704ef8f498b153130018993e56309d4698080"
+  integrity sha512-KIq15bvQDrcCjpGjrAhx4mUlyyHfdmTaoNfeoATHLAiWB+MU3cx4lOzMwrnUh9cCxy0Lt1T11hAFY6TQgroUAA==
+  dependencies:
+    de-indent "^1.0.2"
+    he "^1.1.0"
+
+vue-ts-plugin@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/vue-ts-plugin/-/vue-ts-plugin-0.1.0.tgz#d12e956010fc2b60ddf4b440ecd80ef8c0048716"
+  integrity sha1-0S6VYBD8K2Dd9LRA7NgO+MAEhxY=
+  dependencies:
+    vue-template-compiler "^2.2.1"
 
 vue-type-audit@^0.1.1:
   version "0.1.1"

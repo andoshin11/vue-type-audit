@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`transformers transformScript 1`] = `
-"
+Object {
+  "transformedContent": "
 import { ref, defineComponent } from 'vue'
 import HelloWorld from './HelloWorld.vue'
 
@@ -25,18 +26,18 @@ const __Component = defineComponent({
 
 
 ///////////////////// START: Type Helpers ///////////////////
-import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredPropNames, WithEmitType, MixIntoComponent, isNeverType } from \\"__GLOBAL_TYPES\\";
+import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredProps, WithEmitType, MixIntoComponent, isNeverType } from \\"^__GLOBAL_TYPES\\";
 
 type EVENT_DICT = {
 
 }
 
 type __ExternalComponents = {
-  HelloWorld: ClassInstance<typeof HelloWorld>;
+  HelloWorld: typeof HelloWorld;
 }
 
 type __ExternalComponentsProps = {
-  HelloWorld: RequiredPropNames<__ExternalComponents['HelloWorld']>;
+  HelloWorld: RequiredProps<__ExternalComponents['HelloWorld']>;
 }
 
 const ___Component: MixIntoComponent<typeof __Component, WithEmitType<typeof __Component, EVENT_DICT>> = __Component as any
@@ -44,7 +45,7 @@ const ___Component: MixIntoComponent<typeof __Component, WithEmitType<typeof __C
 export default ___Component;
 
 type __PropArg<N> = N extends keyof __ExternalComponents ?  PropTypes<__ExternalComponents[N]> : _Data
-type __EmitArg<N> = N extends keyof __ExternalComponents ? __ExternalComponents[N]['$options']['__emitHandlerTypes'] : {}
+type __EmitArg<N> = N extends keyof __ExternalComponents ? __ExternalComponents[N]['__emitHandlerTypes'] : {}
 type __DOMArg<N> = N extends string ? N extends keyof __ExternalComponents ? {} : JSX.IntrinsicElements[N] : {}
 
 declare function _createVNode<N extends (keyof __ExternalComponents | _VNodeTypes | _ClassComponent)>(type: N, ...args: (N extends keyof __ExternalComponents ? true extends isNeverType<__ExternalComponentsProps[N]> ? [(_VNodeProps & __PropArg<N> & __EmitArg<N>)?, unknown?, number?, (string[] | null)?, boolean?] : [(_VNodeProps & __PropArg<N> & __EmitArg<N>), unknown?, number?, (string[] | null)?, boolean?] : [((_Data & _VNodeProps & __DOMArg<N>) | null)?, unknown?, number?, (string[] | null)?, boolean?])): _VNode;
@@ -61,11 +62,13 @@ function render(_ctx: ClassInstance<typeof __Component>) {
     _createVNode(\\"button\\", { onClick: _ctx.inc }, \\"Clicked \\" + _toDisplayString(_ctx.count.length) + \\" times.\\", 9 /* TEXT, PROPS */, [\\"onClick\\"]),
     _createVNode(_component_HelloWorld)
   ]))
-}"
+}",
+}
 `;
 
 exports[`transformers transformScript 2`] = `
-"
+Object {
+  "transformedContent": "
 import { defineComponent } from 'vue'
 
 const __Component = defineComponent({
@@ -79,7 +82,7 @@ const __Component = defineComponent({
 
 
 ///////////////////// START: Type Helpers ///////////////////
-import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredPropNames, WithEmitType, MixIntoComponent, isNeverType } from \\"__GLOBAL_TYPES\\";
+import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredProps, WithEmitType, MixIntoComponent, isNeverType } from \\"^__GLOBAL_TYPES\\";
 
 type EVENT_DICT = {
 
@@ -98,7 +101,7 @@ const ___Component: MixIntoComponent<typeof __Component, WithEmitType<typeof __C
 export default ___Component;
 
 type __PropArg<N> = N extends keyof __ExternalComponents ?  PropTypes<__ExternalComponents[N]> : _Data
-type __EmitArg<N> = N extends keyof __ExternalComponents ? __ExternalComponents[N]['$options']['__emitHandlerTypes'] : {}
+type __EmitArg<N> = N extends keyof __ExternalComponents ? __ExternalComponents[N]['__emitHandlerTypes'] : {}
 type __DOMArg<N> = N extends string ? N extends keyof __ExternalComponents ? {} : JSX.IntrinsicElements[N] : {}
 
 declare function _createVNode<N extends (keyof __ExternalComponents | _VNodeTypes | _ClassComponent)>(type: N, ...args: (N extends keyof __ExternalComponents ? true extends isNeverType<__ExternalComponentsProps[N]> ? [(_VNodeProps & __PropArg<N> & __EmitArg<N>)?, unknown?, number?, (string[] | null)?, boolean?] : [(_VNodeProps & __PropArg<N> & __EmitArg<N>), unknown?, number?, (string[] | null)?, boolean?] : [((_Data & _VNodeProps & __DOMArg<N>) | null)?, unknown?, number?, (string[] | null)?, boolean?])): _VNode;
@@ -110,11 +113,13 @@ function render(_ctx: ClassInstance<typeof __Component>) {
   return (_openBlock(), _createBlock(\\"div\\", null, [
     _createVNode(\\"h1\\", null, _toDisplayString(_ctx.msg), 1 /* TEXT */)
   ]))
-}"
+}",
+}
 `;
 
 exports[`transformers transformScript 3`] = `
-"
+Object {
+  "transformedContent": "
 import { defineComponent } from 'vue'
 
 const __Component = defineComponent({
@@ -122,7 +127,7 @@ const __Component = defineComponent({
 
 
 ///////////////////// START: Type Helpers ///////////////////
-import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredPropNames, WithEmitType, MixIntoComponent, isNeverType } from \\"__GLOBAL_TYPES\\";
+import { ClassInstance, _VNodeProps, _resolveComponent, PropTypes, _VNode, _VNodeTypes, _ClassComponent, _Data, RequiredProps, WithEmitType, MixIntoComponent, isNeverType } from \\"^__GLOBAL_TYPES\\";
 
 type EVENT_DICT = {
 
@@ -141,7 +146,7 @@ const ___Component: MixIntoComponent<typeof __Component, WithEmitType<typeof __C
 export default ___Component;
 
 type __PropArg<N> = N extends keyof __ExternalComponents ?  PropTypes<__ExternalComponents[N]> : _Data
-type __EmitArg<N> = N extends keyof __ExternalComponents ? __ExternalComponents[N]['$options']['__emitHandlerTypes'] : {}
+type __EmitArg<N> = N extends keyof __ExternalComponents ? __ExternalComponents[N]['__emitHandlerTypes'] : {}
 type __DOMArg<N> = N extends string ? N extends keyof __ExternalComponents ? {} : JSX.IntrinsicElements[N] : {}
 
 declare function _createVNode<N extends (keyof __ExternalComponents | _VNodeTypes | _ClassComponent)>(type: N, ...args: (N extends keyof __ExternalComponents ? true extends isNeverType<__ExternalComponentsProps[N]> ? [(_VNodeProps & __PropArg<N> & __EmitArg<N>)?, unknown?, number?, (string[] | null)?, boolean?] : [(_VNodeProps & __PropArg<N> & __EmitArg<N>), unknown?, number?, (string[] | null)?, boolean?] : [((_Data & _VNodeProps & __DOMArg<N>) | null)?, unknown?, number?, (string[] | null)?, boolean?])): _VNode;
@@ -153,7 +158,8 @@ function render(_ctx: ClassInstance<typeof __Component>) {
   return (_openBlock(), _createBlock(\\"div\\", null, [
     _createVNode(\\"h1\\", null, \\"Hello world!\\")
   ]))
-}"
+}",
+}
 `;
 
 exports[`transformers transformScript 4`] = `
@@ -161,7 +167,7 @@ Map {
   "test.vue.template.ts" => Object {
     "map": Object {
       "file": "test.vue",
-      "mappings": ";AAEA;AACA;AACA",
+      "mappings": ";EAEE,CAAC,CAAC,CAAC,CAAC;IACF,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;EACtB,CAAC,CAAC,CAAC,CAAC,CAAC",
       "names": Array [],
       "sourceRoot": "",
       "sources": Array [
@@ -206,7 +212,7 @@ export default defineComponent({
   "test.vue.script.ts" => Object {
     "map": Object {
       "file": "test.vue.script.ts",
-      "mappings": ";AAQA;;AAEA;AACA",
+      "mappings": ";AAQA,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;;AAEpC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC/B,CAAC",
       "names": Array [],
       "sourceRoot": "",
       "sources": Array [

@@ -4,6 +4,7 @@ import * as path from 'path'
 import { FileEntry, SourcemapEntry, RawVueFileName } from '../types'
 import { transformVueFile } from '../transformers'
 import { GLOBAL_TYPES_FILE } from '../asset'
+import { Logger } from '../logger'
 import {
   isRawVueFile,
   isTSVueFile,
@@ -20,7 +21,7 @@ import {
  * 2. Load GLOBAL_TYPES_FILE
  * 3. Load `.vue` files as virtual TS files
  */
-export const createHost = (fileNames: string[], compilerOptions: _ts.CompilerOptions, fileEntry: FileEntry, sourcemapEntry: SourcemapEntry, ts: typeof _ts): _ts.LanguageServiceHost => {
+export const createHost = (fileNames: string[], compilerOptions: _ts.CompilerOptions, fileEntry: FileEntry, sourcemapEntry: SourcemapEntry, ts: typeof _ts, logger?: Logger): _ts.LanguageServiceHost => {
   // Register GLOBAL_TYPES_FILE
   fileNames = [...fileNames, GLOBAL_TYPES_FILE.name]
 
@@ -38,6 +39,10 @@ export const createHost = (fileNames: string[], compilerOptions: _ts.CompilerOpt
       return ts.sys.fileExists(fileName) || readSystemFile(fileName) !== undefined
     },
     readFile: fileName => {
+      // if (logger) {
+      //   logger.info('reading file: ' + fileName)
+      // }
+
       if (fileName === GLOBAL_TYPES_FILE.name) {
         return GLOBAL_TYPES_FILE.content
       }
@@ -58,6 +63,10 @@ export const createHost = (fileNames: string[], compilerOptions: _ts.CompilerOpt
     getScriptFileNames: () => fileNames,
     getScriptVersion: fileName => getCurrentVersion(fileName) + '',
     getScriptSnapshot: fileName => {
+      // if (logger) {
+      //   logger.info(`getScriptSnapshot: ${fileName}`)
+      // }
+
       // recover file name
       if (isTSVueFile(fileName)) {
         fileName = toRawVueFileName(fileName)
@@ -77,7 +86,7 @@ export const createHost = (fileNames: string[], compilerOptions: _ts.CompilerOpt
       let content = readSystemFile(fileName)!
 
       if (isRawVueFile(fileName)) {
-        content = transformVueFile(fileName, content, sourcemapEntry, ts)
+        content = transformVueFile(fileName, content, sourcemapEntry, ts).transformedContent
         // fs.writeFileSync(fileName + '.ts', content)
       }
 
@@ -89,6 +98,11 @@ export const createHost = (fileNames: string[], compilerOptions: _ts.CompilerOpt
     getCompilationSettings: () => compilerOptions,
     getDefaultLibFileName: options => ts.getDefaultLibFilePath(options),
     resolveModuleNames: (moduleNames, containingFile, _, __, options) => {
+      // if (logger) {
+      //   logger.info('resolving module names')
+      //   logger.info(`containingFile: ${containingFile}`)
+      //   logger.info(`moduleNames: ${moduleNames}`)
+      // }
       const ret: (_ts.ResolvedModule | undefined)[] = moduleNames.map(name => {
         if (name === GLOBAL_TYPES_FILE.identifier) {
           const resolved: _ts.ResolvedModule = {
@@ -97,6 +111,8 @@ export const createHost = (fileNames: string[], compilerOptions: _ts.CompilerOpt
           return resolved
         }
 
+        // We need to translate file extension, so that TS internal can understand.
+        // `.vue` is forbidden.
         if (isRawVueFile(name)) {
           const absPath = path.resolve(path.dirname(containingFile), name) as RawVueFileName
           const resolved: _ts.ResolvedModule = {

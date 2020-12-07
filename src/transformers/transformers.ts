@@ -58,5 +58,7 @@ export function transformVueFile(
   const output = [scriptBlock.transformed, typeHelpersBlock, templateBlock.transformed].join('\n')
   // fs.writeFileSync(toTSVueFIleName(fileName), output)
 
-  return output
+  return {
+    transformedContent: output
+  }
 }

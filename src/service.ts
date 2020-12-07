@@ -4,11 +4,11 @@ import * as path from 'path'
 import { FileEntry, SourcemapEntry } from './types'
 import { createHost, createService } from './languageService'
 import { Reporter } from './reporter'
-import { isTSVueFile, translateVuefileDiagnostic } from './helpers'
+import { isTSVueFile, translateTSVuefileDiagnostic } from './helpers'
 import { Logger } from './logger'
 
-export class ProxyService {
-  private tsService: _ts.LanguageService
+export class Service {
+  public tsService: _ts.LanguageService
   private logger: Logger
 
   reporter: Reporter
@@ -16,13 +16,13 @@ export class ProxyService {
   sourcemapEntry: SourcemapEntry = new Map()
 
   constructor(public fileNames: string[], private compilerOptions: _ts.CompilerOptions, private ts: typeof _ts, debug: boolean = false) {
-    const host = createHost(fileNames, compilerOptions, this.scriptVersions, this.sourcemapEntry, ts)
+    this.logger = new Logger(debug ? 'info' : 'silent')
+    const host = createHost(fileNames, compilerOptions, this.scriptVersions, this.sourcemapEntry, ts, this.logger)
     this.tsService = createService(host, ts)
     this.reporter = new Reporter()
-    this.logger = new Logger(debug ? 'info' : 'silent')
   }
 
-  static fromConfigFile(configPath: string, ts: typeof _ts, debug: boolean = false): ProxyService {
+  static fromConfigFile(configPath: string, ts: typeof _ts, debug: boolean = false): Service {
     const content = fs.readFileSync(configPath).toString();
     const parsed = ts.parseJsonConfigFileContent(
         JSON.parse(content),
@@ -32,7 +32,7 @@ export class ProxyService {
     const compilerOptions = parsed.options
     const fileNames = parsed.fileNames
 
-    return new ProxyService(fileNames, compilerOptions, ts, debug)
+    return new Service(fileNames, compilerOptions, ts, debug)
   }
 
   getSemanticDiagnostics() {
@@ -49,7 +49,7 @@ export class ProxyService {
     const actualDiagnostics = nativeSemanticDiagnostics.map(d => {
       if (!d.file || !isTSVueFile(d.file.fileName)) return d
 
-      return translateVuefileDiagnostic(d, sourcemapEntry, typeChecker, ts, this.logger)
+      return translateTSVuefileDiagnostic(d, sourcemapEntry, typeChecker, ts, this.logger)
     })
 
     return actualDiagnostics
