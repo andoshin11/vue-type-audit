@@ -5,6 +5,74 @@ Array [
   Object {
     "category": 1,
     "code": 2339,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/App.vue.ts",
+    "length": 6,
+    "messageText": "Property 'length' does not exist on type 'number'.",
+    "start": 414,
+  },
+  Object {
+    "category": 1,
+    "code": 2322,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/App.vue.ts",
+    "length": 4,
+    "messageText": "Type 'number' is not assignable to type 'string | undefined'.",
+    "start": 2790,
+  },
+  Object {
+    "category": 1,
+    "code": 2339,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/App.vue.ts",
+    "length": 6,
+    "messageText": "Property 'length' does not exist on type 'number'.",
+    "start": 2880,
+  },
+  Object {
+    "category": 1,
+    "code": 2554,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/App.vue.ts",
+    "length": 35,
+    "messageText": "Expected 2-6 arguments, but got 1.",
+    "start": 2920,
+  },
+  Object {
+    "category": 1,
+    "code": 2322,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/App.vue.ts",
+    "length": 8,
+    "messageText": "Type '(val: string) => number' is not assignable to type '(val: number) => void'.
+  Types of parameters 'val' and 'val' are incompatible.
+    Type 'number' is not assignable to type 'string'.",
+    "start": 3270,
+  },
+  Object {
+    "category": 1,
+    "code": 2345,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/App.vue.ts",
+    "length": 28,
+    "messageText": "Argument of type '{ onChanged: (val: number) => void; }' is not assignable to parameter of type 'VNodeProps & { initialValue?: number | undefined; } & { onChange?: ((val: number) => void) | undefined; onInput?: ((...args: any) => void) | undefined; }'.
+  Object literal may only specify known properties, but 'onChanged' does not exist in type 'VNodeProps & { initialValue?: number | undefined; } & { onChange?: ((val: number) => void) | undefined; onInput?: ((...args: any) => void) | undefined; }'. Did you mean to write 'onChange'?",
+    "start": 3445,
+  },
+  Object {
+    "category": 1,
+    "code": 2769,
+    "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/Counter.vue.ts",
+    "length": 22,
+    "messageText": "No overload matches this call.
+  Overload 1 of 2, '(event: \\"input\\", ...args: any[]): void', gave the following error.
+    Argument of type '\\"change\\"' is not assignable to parameter of type '\\"input\\"'.
+  Overload 2 of 2, '(event: \\"change\\", val: number): void', gave the following error.
+    Argument of type '\\"hoge\\"' is not assignable to parameter of type 'number'.",
+    "start": 433,
+  },
+]
+`;
+
+exports[`audit should match snapshot 2`] = `
+Array [
+  Object {
+    "category": 1,
+    "code": 2339,
     "file": "/Users/shin/dev/vue-type-audit/test/e2e/project/src/App.vue",
     "length": 6,
     "messageText": "Property 'length' does not exist on type 'number'.",
