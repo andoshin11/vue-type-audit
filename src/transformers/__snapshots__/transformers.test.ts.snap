@@ -167,7 +167,7 @@ Map {
   "test.vue.template.ts" => Object {
     "map": Object {
       "file": "test.vue",
-      "mappings": ";AAEA;AACA;AACA",
+      "mappings": ";EAEE,CAAC,CAAC,CAAC,CAAC;IACF,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;EACtB,CAAC,CAAC,CAAC,CAAC,CAAC",
       "names": Array [],
       "sourceRoot": "",
       "sources": Array [
@@ -212,7 +212,7 @@ export default defineComponent({
   "test.vue.script.ts" => Object {
     "map": Object {
       "file": "test.vue.script.ts",
-      "mappings": ";AAQA;;AAEA;AACA",
+      "mappings": ";AAQA,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;;AAEpC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC/B,CAAC",
       "names": Array [],
       "sourceRoot": "",
       "sources": Array [
