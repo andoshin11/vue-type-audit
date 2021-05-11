@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "kind-of": "^6.0.3",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "vue": "3.0.0-rc.1",
     "vue-next": "^0.0.1",
     "vue-ts-plugin": "^0.1.0",
